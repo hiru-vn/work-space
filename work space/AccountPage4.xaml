@@ -1,0 +1,99 @@
+﻿<Page x:Class="work_space.AccountPage4"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:work_space"
+      mc:Ignorable="d" 
+      xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+      
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AccountPage4">
+
+    <Grid>
+        <materialDesign:ColorZone
+            Background="{DynamicResource PrimaryHueLightBrush}">
+            <StackPanel>
+                <StackPanel x:Name="StkPanelAccountInfo">
+                    <DockPanel Margin="20">
+                        <materialDesign:PackIcon Kind="FileAccount" Height="25" Width="auto"/>
+                        <TextBox Margin="7 0 0 0" x:Name="AccountPage4_txbtitle">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock>Title</TextBlock>
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                        </TextBox>
+                    </DockPanel>
+                    <DockPanel Margin="20">
+                        <materialDesign:PackIcon Kind="UserMinus" Height="25" Width="auto"/>
+                        <TextBox Margin="7 0 0 0" x:Name="AccountPage4_txbuser">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock>User</TextBlock>
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                        </TextBox>
+                    </DockPanel>
+                    <DockPanel Margin="20 20 20 10">
+                        <materialDesign:PackIcon Kind="Key" Height="25" Width="auto"/>
+                        <TextBox Margin="7 0 0 0"
+                                 x:Name="AccountPage4_txbpassword"
+                                 TextChanged="Account_textboxpassword_textChanged">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock>Password</TextBlock>
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                        </TextBox>
+                    </DockPanel>
+                    <DockPanel Margin="50 0 20 0">
+                        <ProgressBar 
+                                     Background="Gray"
+                                     Height="10"
+                                     x:Name="Account_BarCheckPasswordStrength"/>
+                    </DockPanel>
+                    <DockPanel Margin="20">
+                        <materialDesign:PackIcon Kind="Web" Height="25" Width="auto"/>
+                        <TextBox Margin="7 0 0 0" x:Name="AccountPage4_txbwebadress">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock>Website address</TextBlock>
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                        </TextBox>
+                    </DockPanel>
+                </StackPanel>
+                <StackPanel>
+                    <Button x:Name="ButtonAddField" Margin="50 20 20 15" Width="150" HorizontalAlignment="Left" Click="Button_AddField">Add Custom Field</Button>
+                    <Button x:Name="ButtonSaveField" Margin="50 20 20 15" Width="150" HorizontalAlignment="Left" Visibility="Collapsed" Click="Button_SaveField">Save</Button>
+                </StackPanel>
+                <StackPanel Visibility="Collapsed" x:Name="StkPanelCustomField">
+                    <TextBox Margin="50 0 20 10" x:Name="Account_Page4_txbFieldName">
+                        <materialDesign:HintAssist.Hint>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock>Custom Field name</TextBlock>
+                            </StackPanel>
+                        </materialDesign:HintAssist.Hint>
+                    </TextBox>
+                    <TextBox Margin="50 0 20 10" x:Name="Account_Page4_txbFieldContent">
+                        <materialDesign:HintAssist.Hint>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock>Content</TextBlock>
+                            </StackPanel>
+                        </materialDesign:HintAssist.Hint>
+                    </TextBox>
+                </StackPanel>
+            </StackPanel>
+        </materialDesign:ColorZone>
+    </Grid>
+</Page>

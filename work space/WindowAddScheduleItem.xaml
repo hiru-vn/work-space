@@ -1,0 +1,67 @@
+﻿<Window x:Class="work_space.WindowAddScheduleItem"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:work_space"
+        
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        mc:Ignorable="d"
+        Height="265" Width="400"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <materialDesign:ColorZone Height="300"
+           >
+            <StackPanel Margin="35 50 35 35">
+                <TextBox x:Name="TxbName" Margin="0 0 0 15" Foreground="#FF673AB7" BorderBrush="#FF673AB7">
+                    <materialDesign:HintAssist.Hint>
+                        <TextBlock materialDesign:HintAssist.IsFloating="True">Name</TextBlock>
+                    </materialDesign:HintAssist.Hint>
+                </TextBox>
+                <DockPanel Margin="0 0 0 15" HorizontalAlignment="Stretch" LastChildFill="True">
+                    <TextBlock DockPanel.Dock="Right" VerticalAlignment="Bottom" Foreground="#FF673AB7">Enable</TextBlock>
+                    <CheckBox x:Name="ckb_location" DockPanel.Dock="Right" VerticalAlignment="Bottom" Foreground="#FF673AB7" BorderBrush="#FF673AB7"></CheckBox>
+                    <TextBox x:Name="Location" DockPanel.Dock="Left" IsEnabled="{Binding IsChecked, ElementName=ckb_location, Mode=TwoWay}" Foreground="#FF673AB7" BorderBrush="#FF673AB7">
+                        <materialDesign:HintAssist.Hint>
+                            <TextBlock materialDesign:HintAssist.IsFloating="True">Location</TextBlock>
+                        </materialDesign:HintAssist.Hint>
+                    </TextBox>
+                </DockPanel>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:TimePicker x:Name="TimeStart" Foreground="#FF673AB7" BorderBrush="#FF673AB7" Margin="0 0 15 0" VerticalAlignment="Bottom">
+                        <materialDesign:HintAssist.Hint>
+                            <TextBlock materialDesign:HintAssist.IsFloating="True">Time start</TextBlock>
+                        </materialDesign:HintAssist.Hint>
+                    </materialDesign:TimePicker>
+                    <materialDesign:TimePicker x:Name="TimeFinish" Foreground="#FF673AB7" BorderBrush="#FF673AB7" Margin="0 0 15 0" VerticalAlignment="Bottom">
+                        <materialDesign:HintAssist.Hint>
+                            <TextBlock materialDesign:HintAssist.IsFloating="True">Time finish</TextBlock>
+                        </materialDesign:HintAssist.Hint>
+                    </materialDesign:TimePicker>
+                    <xctk:ColorPicker x:Name="ColorPicker" Foreground="#FF673AB7" BorderBrush="#FF673AB7" Background="Transparent" Width="50" Height="20" VerticalAlignment="Center">
+                    </xctk:ColorPicker>
+                </StackPanel>
+                <Grid Margin="0 40 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" VerticalAlignment="Center" Width="120" Click="accept">ACCEPT</Button>
+                    <Button Grid.Column="1" VerticalAlignment="Center" Width="120" Click="cancel">CANCEL</Button>
+                </Grid>
+            </StackPanel>
+        </materialDesign:ColorZone>
+    </Grid>
+</Window>

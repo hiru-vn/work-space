@@ -1,0 +1,50 @@
+﻿<Window x:Class="work_space.WindowEvent"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:work_space"
+        
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        mc:Ignorable="d"
+        Height="240" Width="400"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="50 40 50 20">
+        <StackPanel>
+            <TextBox x:Name="TxbName" Foreground="#FF673AB7" BorderBrush="#FF673AB7">
+                <materialDesign:HintAssist.Hint>
+                    <TextBlock FontSize="18" Foreground="#FF673AB7">Event</TextBlock>
+                </materialDesign:HintAssist.Hint>
+            </TextBox>
+            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                <DatePicker x:Name="datepicker" Foreground="#FF673AB7" BorderBrush="#FF673AB7" VerticalAlignment="Bottom" Margin="0 0 10 0">
+                    <materialDesign:HintAssist.Hint>
+                        Select date
+                    </materialDesign:HintAssist.Hint>
+                </DatePicker>
+                <materialDesign:TimePicker x:Name="timepicker" BorderBrush="#FF673AB7" Foreground="#FF673AB7">
+                    
+                </materialDesign:TimePicker>
+            </StackPanel>
+            <Grid Margin="0 35 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" VerticalAlignment="Center" Width="120" Click="accept">ACCEPT</Button>
+                <Button Grid.Column="1" VerticalAlignment="Center" Width="120" Click="cancel">CANCEL</Button>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

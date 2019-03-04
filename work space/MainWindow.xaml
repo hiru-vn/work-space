@@ -1,0 +1,980 @@
+﻿<Window
+        Name="main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:work_space"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="work_space.MainWindow"
+        xmlns:Customcontrols="clr-namespace:work_space.Custom_controls"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        mc:Ignorable="d"
+        Title="" Width="900" Height="auto" MinWidth="400"
+        WindowStartupLocation="CenterScreen" 
+        Icon="pack://siteoforigin:,,,/Resources/WSico2.png" SizeChanged="Window_sizechange">
+    <Window.Resources>
+        <local:PercentageConverter x:Key="PercentageConverter"/>
+        <local:MathConverter x:Key="MathConverter"/>
+        <local:ColorToSolidBrushConverter x:Key="ColorToSolidBrushConverter"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Height="60" Grid.Row="0" VerticalAlignment="Top" 
+              Background="#FF9C27B0">
+            <TextBlock Height="{Binding ActualWidth, ConverterParameter=1, Converter={StaticResource PercentageConverter}, ElementName=canvas}" Text="WORK SPACE" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" FontFamily="Champagne &amp; Limousines" FontWeight="Bold" />
+            <Button Height="{Binding ActualWidth, ConverterParameter=1, Converter={StaticResource PercentageConverter}, ElementName=canvas}" HorizontalAlignment="Right" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}">
+                <materialDesign:PackIcon Kind="Power"/>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1" Background="#DDE0E0E0" HorizontalAlignment="Stretch">
+            <dragablz:TabablzControl HorizontalContentAlignment="Center" x:Name="MainTabControl">
+                <dragablz:TabablzControl.InterTabController>
+                    <dragablz:InterTabController/>
+                </dragablz:TabablzControl.InterTabController>
+                <TabItem>
+                    <TabItem.Header>
+                        <TextBlock FontWeight="Bold" Foreground="WhiteSmoke" Padding="20 0 20 0"><Run Text="HOME"/></TextBlock>
+                    </TabItem.Header>
+                    <Grid Margin="0 30 0 30">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0" LastChildFill="False" HorizontalAlignment="Center" x:Name="Home_container">
+                            <Grid DockPanel.Dock="Top" HorizontalAlignment="Center"
+                                  Height="{Binding Path=ActualHeight, ElementName= Home_container, Converter={StaticResource MathConverter}, ConverterParameter=@VALUE*0.34}"
+                                  MinHeight="120">
+                                <Grid VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"></RowDefinition>
+                                        <RowDefinition Height="60"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Column="0" Grid.RowSpan="2">
+                                        <Image Source="pack://siteoforigin:,,,/Resources/WSico2.png" HorizontalAlignment="Right"></Image>
+                                    </Grid>
+                                    <Grid Grid.Row="0" Grid.Column="1">
+                                        <TextBlock FontWeight="Bold" Padding="10" HorizontalAlignment="Left" FontSize="28" VerticalAlignment="Bottom" Foreground="#FF673AB7"><Run Text="WELCOME TO WORK SPACE"/></TextBlock>
+                                    </Grid>
+                                    <Grid Grid.Row="1" Grid.Column="1">
+                                        <TextBlock Foreground="CadetBlue" Margin="6 0 0 0" VerticalAlignment="Top">
+                                        <Hyperlink NavigateUri="http://www.google.com" RequestNavigate="Hyperlink_RequestNavigate"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Magnify"></materialDesign:PackIcon>
+                                            <TextBlock>Explore</TextBlock>
+                                        </StackPanel>
+                                    </TextBlock>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            <Grid DockPanel.Dock="Bottom" Height="auto" >
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20">
+                                    <Customcontrols:HomeCard x:Name="Home_cardSchedule"></Customcontrols:HomeCard>
+                                    <Customcontrols:HomeCard x:Name="Home_cardTask"></Customcontrols:HomeCard>
+                                    <Customcontrols:HomeCard x:Name="Home_cardDiary"></Customcontrols:HomeCard>
+                                    <Customcontrols:HomeCard x:Name="Home_cardAccount"></Customcontrols:HomeCard>
+                                </StackPanel>
+                            </Grid>
+                        </DockPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <TextBlock FontWeight="Bold" Foreground="WhiteSmoke" Padding="20 0 20 0"><Run Text="SCHEDULE"/></TextBlock>
+                    </TabItem.Header>
+                    <Grid Margin="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.85*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Viewbox Grid.Column="0" Height="2000" VerticalAlignment="Top">
+                            <StackPanel>
+                                <StackPanel Margin="5 0 0 15" Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <StackPanel x:Name="Schedule_stackpanelroutine" Orientation="Horizontal">
+                                        <TextBlock
+                                        Foreground="#FF673AB7"
+                                        FontSize="13"
+                                        Margin="0 0 10 0">2 weeks routine</TextBlock>
+                                        <ToggleButton
+                                        Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                                        ToolTip="on/off" Click="SwitchRoutine" />
+                                    </StackPanel>
+                                    <Button x:Name="Schedule_buttonweek1" IsEnabled="False" Margin="0 0 3 0" Visibility="Collapsed" Click="SwitchRoutineButtonClick">WEEK 1</Button>
+                                    <Button x:Name="Schedule_buttonweek2" Visibility="Collapsed" Click="SwitchRoutineButtonClick">WEEK 2</Button>
+                                </StackPanel>
+                                <Calendar x:Name="Schedule_Canlender"></Calendar>
+                                <TextBlock Margin="0 30 0 10"
+                                           FontSize="20"
+                                           FontFamily="MV boli"
+                                    HorizontalAlignment="Center" 
+                                        Foreground="#FF673AB7"
+                                        FontWeight="DemiBold">UP COMING EVENTS</TextBlock>
+                                <materialDesign:DialogHost
+                            DialogClosing="Diary_dialoghost_Closing"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                                    <Border
+                                BorderThickness="1"
+                                BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+                                Width="{Binding ActualWidth, ElementName=Schedule_Canlender,Mode=OneWay}"
+                                MinHeight="{Binding ActualHeight, ElementName=Schedule_Canlender,Mode=OneWay}"
+                                ClipToBounds="True">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition
+                                            Height="*" />
+                                                <RowDefinition
+                                            Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <ListBox
+                                            x:Name="Schedule_eventlist" SelectionChanged="Schedule_EventSelected">
+                                            </ListBox>
+                                            <materialDesign:ColorZone
+                                        Mode="PrimaryMid"
+                                        Grid.Row="1"
+                                        Effect="{DynamicResource MaterialDesignShadowDepth5}">
+                                                <TextBlock
+                                            Margin="16">
+                                            Events
+                                                </TextBlock>
+                                            </materialDesign:ColorZone>
+                                            <Button
+                                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                        VerticalAlignment="Bottom"
+                                        HorizontalAlignment="Right"
+                                        Grid.Row="0"
+                                        Margin="0 0 28 -20" Click="Schedule_newevent">
+                                                <materialDesign:PackIcon
+                                            Kind="Plus"
+                                            Height="22"
+                                            Width="22" />
+                                            </Button>
+                                        </Grid>
+                                    </Border>
+                                </materialDesign:DialogHost>
+                            </StackPanel>
+                        </Viewbox>
+                        <ScrollViewer Grid.Column="1">
+                            <Grid Margin="5 0 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.166*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.166*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.166*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.166*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.166*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.166*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Margin="0 0 1 0">
+                                    <DockPanel Background="#FFD1C4E9">
+                                        <TextBlock Margin="0 5 0 5"
+                                        HorizontalAlignment="Center"
+                                        Foreground="#FF673AB7"
+                                        FontWeight="DemiBold">MON</TextBlock>
+                                    </DockPanel>
+                                    <StackPanel x:Name="Schedule_stackpanel_2" Tag="2">
+                                        
+                                    </StackPanel>
+                                    <Button
+                                    Background="#FF7F4DD9"
+                                    BorderBrush="#FF7F4DD9"
+                                    Margin="5" Click="Schedule_newwork">
+                                        <materialDesign:PackIcon Kind="Plus" Foreground="White"/>
+                                    </Button>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Margin="1 0 1 0">
+                                    <DockPanel Background="#FFD1C4E9">
+                                        <TextBlock
+                                        Margin="0 5 0 5"
+                                        HorizontalAlignment="Center" 
+                                        Foreground="#FF673AB7"
+                                        FontWeight="DemiBold">TUE</TextBlock>
+                                    </DockPanel>
+                                    <StackPanel  x:Name="Schedule_stackpanel_3" Tag="3">
+
+                                    </StackPanel>
+                                    <Button
+                                    Background="#FF7F4DD9"
+                                    BorderBrush="#FF7F4DD9"
+                                    Margin="5" Click="Schedule_newwork">
+                                        <materialDesign:PackIcon Kind="Plus" Foreground="White"/>
+                                    </Button>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2" Margin="1 0 1 0">
+                                    <DockPanel Background="#FFD1C4E9">
+                                        <TextBlock
+                                        Margin="0 5 0 5"
+                                        HorizontalAlignment="Center" 
+                                        Foreground="#FF673AB7"
+                                        FontWeight="DemiBold">WED</TextBlock>
+                                    </DockPanel>
+                                    <StackPanel x:Name="Schedule_stackpanel_4" Tag="4">
+
+                                    </StackPanel>
+                                    <Button
+                                    Background="#FF7F4DD9"
+                                    BorderBrush="#FF7F4DD9"
+                                    Margin="5" Click="Schedule_newwork">
+                                        <materialDesign:PackIcon Kind="Plus" Foreground="White"/>
+                                    </Button>
+                                </StackPanel >
+                                <StackPanel Grid.Column="3" Margin="1 0 1 0">
+                                    <DockPanel Background="#FFD1C4E9">
+                                        <TextBlock Margin="0 5 0 5"
+                                        HorizontalAlignment="Center" 
+                                        Foreground="#FF673AB7"
+                                        FontWeight="DemiBold">THU</TextBlock>
+                                    </DockPanel>
+                                    <StackPanel  x:Name="Schedule_stackpanel_5" Tag="5">
+
+                                    </StackPanel>
+                                    <Button
+                                    Background="#FF7F4DD9"
+                                    BorderBrush="#FF7F4DD9"
+                                    Margin="5" Click="Schedule_newwork">
+                                        <materialDesign:PackIcon Kind="Plus" Foreground="White"/>
+                                    </Button>
+                                </StackPanel>
+                                <StackPanel Grid.Column="4" Margin="1 0 1 0">
+                                    <DockPanel Background="#FFD1C4E9">
+                                        <TextBlock Margin="0 5 0 5"
+                                        HorizontalAlignment="Center" 
+                                        Foreground="#FF673AB7"
+                                        FontWeight="DemiBold">FRI</TextBlock>
+                                    </DockPanel>
+                                    <StackPanel x:Name="Schedule_stackpanel_6" Tag="6">
+
+                                    </StackPanel>
+                                    <Button
+                                    Background="#FF7F4DD9"
+                                    BorderBrush="#FF7F4DD9"
+                                    Margin="5" Click="Schedule_newwork">
+                                        <materialDesign:PackIcon Kind="Plus" Foreground="White"/>
+                                    </Button>
+                                </StackPanel>
+                                <StackPanel Grid.Column="5" Margin="1 0 0 0">
+                                    <DockPanel Background="#FFD1C4E9" >
+                                        <TextBlock Margin="0 5 0 5"
+                                        HorizontalAlignment="Center" 
+                                        Foreground="#FF673AB7"
+                                        FontWeight="DemiBold">SAT</TextBlock>
+                                    </DockPanel>
+                                    <StackPanel x:Name="Schedule_stackpanel_7" Tag="7">
+
+                                    </StackPanel>
+                                    <Button
+                                    Background="#FF7F4DD9"
+                                    BorderBrush="#FF7F4DD9"
+                                    Margin="5" Click="Schedule_newwork">
+                                        <materialDesign:PackIcon Kind="Plus" Foreground="White"/>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <TextBlock FontWeight="Bold" Foreground="WhiteSmoke" Padding="20 0 20 0"><Run Text="TASKS"/></TextBlock>
+                    </TabItem.Header>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="0.86*"/>
+                                <RowDefinition Height="0.14*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" Background="MediumPurple" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition
+                                            Width="Auto" />
+                                    <ColumnDefinition
+                                            Width="*" />
+                                    <ColumnDefinition
+                                            Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Button
+                                        Style="{DynamicResource MaterialDesignToolButton}">
+                                    <materialDesign:PackIcon
+                                            Kind="PlusBoxOutline"
+                                            Opacity="2"
+                                            Margin="0 0 0 2"/>
+                                </Button>
+                                <TextBox
+                                        Grid.Column="1"
+                                        Margin="8 0 0 0"
+                                        materialDesign:HintAssist.Hint="add a new task"
+                                        materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                        BorderThickness="0"
+                                        MinWidth="200"
+                                        Width="600"
+                                        Name="TextBoxTask"
+                                        VerticalAlignment="Center" KeyDown="TextBoxTask_KeyDown" />
+                                <Button
+                                        Style="{DynamicResource MaterialDesignToolButton}"
+                                        Grid.Column="2">
+                                    <materialDesign:PackIcon
+                                            Kind="Microphone"
+                                            Opacity=".56"
+                                            Margin="8 0 0 0" />
+                                </Button>
+                            </Grid>
+                            <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal">
+                                <TextBlock Margin="0 7 10 0" Foreground="DarkGray" DockPanel.Dock="Left"><Run Text="Sort by"/></TextBlock>
+                                <ComboBox x:Name="Task_comboboxsort"
+                                          SelectedValuePath="Content"
+                                          DropDownClosed="Task_comboboxsort_SelectionChanged"
+                                          Margin="10 0 10 0" Width="auto" IsEditable="True" AllowDrop="True" IsReadOnly="True" DockPanel.Dock="Left" >
+                                    <ComboBoxItem IsSelected="True" Content="Priority"/>
+                                    <ComboBoxItem Content="Deadline"/>
+                                </ComboBox>
+                                <ComboBox x:Name="Task_comboboxday" 
+                                     SelectedValuePath="Content" Margin="10 0 10 0" Width="auto" IsEditable="True" IsReadOnly="True" DockPanel.Dock="Right" 
+                                     DropDownClosed="Task_comboboxday_DropDownClosed"
+                                     >
+                                    <ComboBoxItem IsSelected="True" Content="Today"/>
+                                    <ComboBoxItem Content="Tomorrow"/>
+                                    <ComboBoxItem Content="This week"/>
+                                    <ComboBoxItem Content="This month"/>
+                                    <ComboBoxItem Content="Anytime"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <Grid Tag="Task tree view" Grid.Row="2">
+                                <ListView
+                                    ItemsSource="{Binding Task}"
+                                    HorizontalAlignment="Center"
+                                    x:Name="listviewtask" 
+                                    ScrollViewer.CanContentScroll="True"
+                                    AllowDrop="True" mah:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" ClipToBounds="True" BorderThickness="0"
+                                        >
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn
+                                                Header="Priority"
+                                                Width="80"
+                                                ScrollViewer.CanContentScroll="True"
+                                                >
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <ComboBox Width="65" Height="30"
+                                                        IsEditable="True" IsReadOnly="True"
+                                                        SelectedIndex="{Binding IDPriority}"
+                                                        SelectionChanged="Task_comboboxpriority_SelectionChanged"
+                                                        Tag="{Binding IDTask}"
+                                                        >
+                                                            <!--<ComboBoxItem>
+                                                                <Rectangle Height="15" Width="15" Fill="Green"></Rectangle>
+                                                            </ComboBoxItem>
+                                                            <ComboBoxItem>
+                                                                <Rectangle Height="15" Width="15" Fill="Yellow"></Rectangle>
+                                                            </ComboBoxItem>
+                                                            <ComboBoxItem>
+                                                                <Rectangle Height="15" Width="15" Fill="red"></Rectangle>
+                                                            </ComboBoxItem>-->
+                                                            <ComboBoxItem Content="High"/>
+                                                            <ComboBoxItem Content="Medium"/>
+                                                            <ComboBoxItem Content="Low"/>
+                                                        </ComboBox>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn                                               
+                                                Header="Task" Width="340"
+                                             >
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Content}"
+                                                        TextWrapping="Wrap"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn
+                                            Header="Deadline" Width="155">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal" Tag="{Binding IDTask}">
+                                                        <DatePicker 
+                                                              SelectedDateChanged="Task_calendardate_SelectionChange"
+                                                              materialDesign:HintAssist.Hint="Date"
+                                                              SelectedDate="{Binding Deadline, StringFormat='ddd d-M',Mode=OneWay}"
+                                                              Width="80"
+                                                              Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                                            <TextBlock Text="  "></TextBlock>
+                                                            <materialDesign:TimePicker
+                                                              SelectedTimeChanged="Task_calendartime_SelectionChange"
+                                                              SelectedTime="{Binding Deadline, StringFormat='h:mm',Mode=OneWay}"
+                                                              Is24Hours="True"
+                                                              materialDesign:HintAssist.Hint="Time"
+                                                              Width="55"/> 
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn
+                                                Header="Checked" Width="95">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <CheckBox Opacity=".65" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                            Content="x"
+                                                            IsChecked="{Binding Checked}"
+                                                            Style="{StaticResource MaterialDesignActionDarkCheckBox}"
+                                                            ToolTip="MaterialDesignActionDarkCheckBox"
+                                                            Tag="{Binding IDTask}" Click="Task_checkboxchecked_Clicked"/>
+                                                            <TextBlock Text="    "></TextBlock>
+                                                            <Button Height="31" Width="31"
+                                                            Tag="{Binding IDTask}"
+                                                            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                                            ToolTip="MaterialDesignFloatingActionMiniLightButton" 
+                                                            Click="Task_buttondelete_Clicked">
+                                                                <materialDesign:PackIcon
+                                                                Kind="TrashCanOutline"
+                                                                Height="25"
+                                                                Width="25" 
+                                                                />
+                                                            </Button>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </Grid>
+                        </Grid>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <TextBlock FontWeight="Bold" Foreground="WhiteSmoke" Padding="20 0 20 0"><Run Text="DIARY"/></TextBlock>
+                    </TabItem.Header>
+                    <Grid Margin="10 10 20 10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Row="0" Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition
+                                    Height="auto" />
+                                    <RowDefinition
+                                    Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Background="MediumPurple">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition
+                                                Width="Auto" />
+                                        <ColumnDefinition
+                                                Width="*" />
+                                        <ColumnDefinition
+                                                Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button
+                                            Style="{DynamicResource MaterialDesignToolButton}">
+                                        <materialDesign:PackIcon
+                                                Kind="PlusBoxOutline"
+                                                Opacity="2"
+                                                Margin="0 0 0 0"/>
+                                    </Button>
+                                    <TextBox
+                                            Grid.Column="1"
+                                            Margin="8 0 0 0"
+                                            materialDesign:HintAssist.Hint="what on your mind?"
+                                            materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                            BorderThickness="0"
+                                            MinWidth="150"
+                                            Width="600"
+                                            x:Name="Story_textboxfastadd"
+                                            KeyUp="Story_textboxfastadd_KeyUp"
+                                            VerticalAlignment="Center" KeyDown="Story_textboxfastadd_KeyDown" />
+                                    <Button Click="Diary_ButtonClearTextbox_Clicked"
+                                            Visibility="Collapsed"
+                                            x:Name="Diary_ButtonClearTextbox"
+                                            Style="{DynamicResource MaterialDesignToolButton}"
+                                            Grid.Column="2">
+                                            <materialDesign:PackIcon
+                                                Kind="CloseOctagonOutline"
+                                                Opacity="2"
+                                                Margin="0 0 0 0"/>
+                                    </Button>
+                                </Grid>
+                            <Viewbox Grid.Row="1">
+                                <Calendar
+                                Width="auto" Height="auto"
+                                x:Name="Diary_calendar"
+                                SelectedDatesChanged="Diary_calendar_SelectedDatesChanged"
+                                Margin="0 0 0 0" />
+                            </Viewbox>
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="0">
+                            <Viewbox>
+                            <materialDesign:DialogHost DialogClosing="Diary_dialoghost_Closing"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                                <materialDesign:DialogHost.DialogContent>
+                                    <StackPanel
+                                    Margin="6">
+                                            <TextBlock Text=" Add a new story."/>
+                                            <TextBox
+                                        Margin="0 8 0 0"
+                                        HorizontalAlignment="Stretch"
+                                        x:Name="Story_textboxadd" />
+                                        <StackPanel
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Right">
+                                            <Button
+                                            Style="{StaticResource MaterialDesignFlatButton}"
+                                            IsDefault="True"
+                                            Margin="0 8 8 0"
+                                            Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        True
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                                ADD
+                                            </Button>
+                                            <Button
+                                            Style="{StaticResource MaterialDesignFlatButton}"
+                                            IsCancel="True"
+                                            Margin="0 8 8 0"
+                                            Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        False
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                                CANCEL
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </materialDesign:DialogHost.DialogContent>
+                                <Border
+                                BorderThickness="1"
+                                BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+                                MinWidth="256"
+                                MinHeight="256"
+                                ClipToBounds="True">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition
+                                            Height="*" />
+                                            <RowDefinition
+                                            Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <ListBox
+                                        x:Name="Story_titlelistbox" SelectionChanged="Diary_titlelistbox_SelectionChanged">
+                                        </ListBox>
+                                        <materialDesign:ColorZone
+                                        Mode="PrimaryMid"
+                                        Grid.Row="1"
+                                        Effect="{DynamicResource MaterialDesignShadowDepth5}">
+                                            <TextBlock
+                                            Margin="16">
+                                            Stories
+                                            </TextBlock>
+                                        </materialDesign:ColorZone>
+                                        <Button
+                                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                        VerticalAlignment="Bottom"
+                                        HorizontalAlignment="Right"
+                                        Grid.Row="0"
+                                        Margin="0 0 28 -20">
+                                            <materialDesign:PackIcon
+                                            Kind="Plus"
+                                            Height="22"
+                                            Width="22" />
+                                        </Button>
+                                    </Grid>
+                                </Border>
+                            </materialDesign:DialogHost>
+                            </Viewbox>
+                        </Grid>
+                        <Grid Grid.Column="1" Grid.RowSpan="2" Name="GridDiaryContent">
+                            <StackPanel Orientation="Vertical">
+                                <DockPanel Height="auto" LastChildFill="False">
+                                    <Button Height="25" Width="auto"
+                                    DockPanel.Dock="Left"
+                                    Click="Story_buttonsave_Clicked"
+                                    Margin="32,2,0,8"
+                                    Style="{StaticResource MaterialDesignRaisedButton}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="ContentSave" Height="15" Width="15" Margin="-12 -2 0 0"/>
+                                            <TextBlock Margin="0 -2 -10 0">save</TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                    <ComboBox Name="Story_comboboxfontfamily"
+                                    DockPanel.Dock="Left"
+                                    Margin="20 -10 0 0" SelectedValuePath="FontFamily"
+                                    materialDesign:HintAssist.Hint="Font" Width="70" Height="25" SelectionChanged="Story_comboboxfontfamily_SelectionChange">
+                                        <ComboBoxItem FontFamily="Arial" Content="Arial"/>
+                                        <ComboBoxItem FontFamily="MV Boli" Content="MV Boli"/>
+                                        <ComboBoxItem FontFamily="Script MT Bold" Content="Script MT Bold"/>
+                                        <ComboBoxItem FontFamily="SimSun" Content="SimSun"/>
+                                        <ComboBoxItem FontFamily="Rockwell" Content="Rockwell"/>
+                                        <ComboBoxItem FontFamily="Tekton Pro" Content="Tekton Pro"/>
+                                        <ComboBoxItem  FontFamily="Segoe Script" Content="Segoe Script"/>
+                                    </ComboBox>
+                                    <Viewbox Height="20" Margin="20 -5 0 0" DockPanel.Dock="Left">
+                                        <ListBox SelectedValuePath="Tag" x:Name="Story_listboxfontstyle"
+                                        Style="{StaticResource MaterialDesignToolToggleFlatListBox}" SelectionChanged="Story_listboxfontstyle_SelectionChanged">
+                                            <ListBoxItem Tag="Bold">
+                                                <materialDesign:PackIcon
+                                                Kind="FormatBold" />
+                                            </ListBoxItem>
+                                            <ListBoxItem Tag="Italic">
+                                                <materialDesign:PackIcon
+                                                Kind="FormatItalic" />
+                                            </ListBoxItem>
+                                            <ListBoxItem Tag="Underline">
+                                                <materialDesign:PackIcon
+                                                Kind="FormatUnderline" />
+                                            </ListBoxItem>
+                                        </ListBox>
+                                    </Viewbox>
+                                    <ComboBox Name="Story_comboboxfontsize"
+                                              DockPanel.Dock="Left"
+                                    Margin="20 -10 0 0" SelectedValuePath="Content"
+                                    materialDesign:HintAssist.Hint="Size" Width="40" Height="25" SelectionChanged="Story_comboboxfontsize_SelectionChange">
+                                        <ComboBoxItem Content="8" HorizontalContentAlignment="Right"/>
+                                        <ComboBoxItem Content="10" HorizontalContentAlignment="Right"/>
+                                        <ComboBoxItem Content="12" HorizontalContentAlignment="Right"/>
+                                        <ComboBoxItem Content="14" HorizontalContentAlignment="Right"/>
+                                        <ComboBoxItem Content="16" HorizontalContentAlignment="Right"/>
+                                        <ComboBoxItem Content="18" HorizontalContentAlignment="Right"/>
+                                        <ComboBoxItem Content="20" HorizontalContentAlignment="Right"/>
+                                        <ComboBoxItem Content="22" HorizontalContentAlignment="Right"/>
+                                        <ComboBoxItem Content="24" HorizontalContentAlignment="Right"/>
+                                        <ComboBoxItem Content="26" HorizontalContentAlignment="Right"/>
+                                        <ComboBoxItem Content="28" HorizontalContentAlignment="Right"/>
+                                        <ComboBoxItem Content="36" HorizontalContentAlignment="Right"/>
+                                    </ComboBox>
+                                    <ComboBox Name="Story_comboboxfontcolor"
+                                              DockPanel.Dock="Left"
+                                    Margin="20 -10 0 0" SelectedValuePath="Foreground"
+                                    materialDesign:HintAssist.Hint="Color" Width="60" Height="25" SelectionChanged="Story_comboboxfontcolor_SelectionChange">
+                                        <ComboBoxItem FontFamily="{Binding Path=SelectedValue, ElementName=Story_comboboxfontfamily}" Content="Purple" Foreground="#8E24AA"/>
+                                        <ComboBoxItem FontFamily="{Binding Path=SelectedValue, ElementName=Story_comboboxfontfamily}" Content="Aqua" Foreground="Aqua"/>
+                                        <ComboBoxItem FontFamily="{Binding Path=SelectedValue, ElementName=Story_comboboxfontfamily}" Content="Black" Foreground="Black"/>
+                                        <ComboBoxItem FontFamily="{Binding Path=SelectedValue, ElementName=Story_comboboxfontfamily}" Content="Green" Foreground="#64DD17"/>
+                                        <ComboBoxItem FontFamily="{Binding Path=SelectedValue, ElementName=Story_comboboxfontfamily}" Content="Blue" Foreground="#1E88E5"/>
+                                        <ComboBoxItem FontFamily="{Binding Path=SelectedValue, ElementName=Story_comboboxfontfamily}" Content="Red" Foreground="#E53935"/>
+                                        <ComboBoxItem FontFamily="{Binding Path=SelectedValue, ElementName=Story_comboboxfontfamily}" Content="Pink" Foreground="#F06292"/>
+                                        <ComboBoxItem FontFamily="{Binding Path=SelectedValue, ElementName=Story_comboboxfontfamily}" Content="Yellow" Foreground="#FFFF00"/>
+                                        <ComboBoxItem FontFamily="{Binding Path=SelectedValue, ElementName=Story_comboboxfontfamily}" Content="Brown" Foreground="#6D4C41"/>
+                                        <ComboBoxItem FontFamily="{Binding Path=SelectedValue, ElementName=Story_comboboxfontfamily}" Content="Grey" Foreground="#616161"/>
+                                    </ComboBox>
+                                    <Button Height="25" Width="auto"
+                                            DockPanel.Dock="Right"
+                                            Background="PaleVioletRed"
+                                            BorderBrush="PaleVioletRed"
+                                    Click="Story_buttondelete_Clicked"
+                                    Margin="0,2,0,8"
+                                    Style="{StaticResource MaterialDesignRaisedButton}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="TrashCanOutline" Height="15" Width="15" Margin="-12 -2 0 0"/>
+                                            <TextBlock Margin="0 -2 -10 0">delete</TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                </DockPanel>
+                                <TextBox x:Name="Story_textbox"
+                                Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                                Margin="32,0,0,0"
+                                VerticalAlignment="Top"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                FontSize="{Binding Path=SelectedValue,ElementName=Story_comboboxfontsize}"
+                                Foreground="{Binding Path=SelectedValue, ElementName=Story_comboboxfontcolor}"
+                                FontFamily="{Binding Path=SelectedValue, ElementName=Story_comboboxfontfamily}"
+                                Height="{Binding Path=ActualHeight, ElementName= GridDiaryContent, Converter={StaticResource MathConverter}, ConverterParameter=@VALUE-35}"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Your story here."/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <TextBlock FontWeight="Bold" Foreground="WhiteSmoke" Padding="20 0 20 0"><Run Text="ACCOUNTS"/></TextBlock>
+                    </TabItem.Header>
+                    <Grid x:Name="GridAccount">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.6*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <materialDesign:Card 
+                        Height="{Binding Path=ActualHeight, ElementName= GridAccount, Converter={StaticResource MathConverter}, ConverterParameter=@VALUE-90}"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        x:Name="Account_cardrepository"
+                        Margin="30 30 15 30"
+                        Background="{DynamicResource PrimaryHueLightBrush}"
+                        Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <StackPanel Height="auto" Width="auto" Orientation="Vertical">
+                                    <materialDesign:ColorZone
+                                    Mode="PrimaryMid"
+                                    Padding="16">
+                                        <DockPanel>
+                                            <Button DockPanel.Dock="Left"
+                                        Style="{DynamicResource MaterialDesignToolButton}">
+                                                <materialDesign:PackIcon
+                                            Kind="FolderSearchOutline"
+                                            Foreground="White"
+                                            Margin="0 -2 0 0"/>
+                                            </Button>
+                                            <TextBox DockPanel.Dock="Left"
+                                        x:Name="Account_textboxsearch"
+                                        Grid.Column="1"
+                                        Margin="0 0 0 0"
+                                        Foreground="White"
+                                        materialDesign:HintAssist.Hint="Search"
+                                        materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                        BorderThickness="0"
+                                        Width="{Binding Path=ActualWidth, ElementName= Account_cardrepository, Converter={StaticResource MathConverter}, ConverterParameter=@VALUE-170}"
+                                        VerticalAlignment="Center" KeyUp="Account_textboxsearch_KeyUp" />
+                                            <Button DockPanel.Dock="Left" x:Name="Account_buttonclearsearchtext"
+                                        Style="{DynamicResource MaterialDesignToolButton}" Visibility="Collapsed" Click="Account_buttonclearsearchtext_Clicked">
+                                                <materialDesign:PackIcon
+                                            Kind="MicrosoftXamarin"
+                                            Opacity="2"
+                                            Margin="0 -2 0 0"/>
+                                            </Button>
+                                            <ComboBox
+                                            DockPanel.Dock="Right"
+                                            SelectedValuePath="Tag"
+                                            MinWidth="70" MaxWidth="80"
+                                            Margin="5 -15 -5 0"
+                                            Foreground="White"
+                                            x:Name="Account_comboboxShowMode"
+                                            materialDesign:HintAssist.FloatingScale="0.7"
+                                            materialDesign:HintAssist.FloatingOffset="0,+24"
+                                            materialDesign:HintAssist.Hint="View By" 
+                                            materialDesign:HintAssist.IsFloating="True"
+                                            Background="{DynamicResource PrimaryHueMidBrush}" SelectionChanged="Account_comboboxShowMode_selectionChange">
+                                                <ComboBoxItem Tag="Folder">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <materialDesign:PackIcon
+                                                    Kind="Folder"
+                                                    Margin="0 0 0 0"/>
+                                                        <TextBlock Margin="5 0 0 0">Folder</TextBlock>
+                                                    </StackPanel>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem Tag="File">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <materialDesign:PackIcon
+                                                    Kind="File"
+                                                    Margin="0 0 0 0"/>
+                                                        <Separator></Separator>
+                                                        <TextBlock Margin="5 0 0 0">File</TextBlock>
+                                                    </StackPanel>
+                                                </ComboBoxItem>
+                                            </ComboBox>
+                                        </DockPanel>
+                                    </materialDesign:ColorZone>
+                                    <StackPanel ScrollViewer.CanContentScroll="True">
+                                        <materialDesign:ColorZone
+                                        Mode="PrimaryLight"
+                                        Margin="0 0 0 0">
+                                            <TreeView ScrollViewer.CanContentScroll="True"
+                                        x:Name="Account_treeview"
+                                        MinWidth="220" SelectedItemChanged="Account_treeview_selecteditemChange">
+                                            </TreeView>
+                                        </materialDesign:ColorZone>
+                                        <materialDesign:PopupBox
+                                    Grid.Row="1"
+                                    Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                                    PlacementMode="LeftAndAlignMiddles"
+                                    UnfurlOrientation="Horizontal"
+                                    ToolTip="Manage items"
+                                    Margin="0 0 10 10"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom">
+                                            <StackPanel
+                                        Orientation="Horizontal">
+                                                <Button
+                                            Click="Account_buttonaddcategory_Clicked"
+                                            ToolTip="Add an category"
+                                            Command="{Binding AddCommand}">
+                                                    <Path
+                                                Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                                                Stretch="Uniform"
+                                                Width="15"
+                                                Height="15"
+                                                Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                                </Button>
+                                                <Button
+                                            ToolTip="Remove selected item"
+                                            Command="{Binding RemoveSelectedItemCommand}" Click="Account_buttondelete">
+                                                    <Path
+                                                Data="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+                                                Stretch="Uniform"
+                                                Width="15"
+                                                Height="15"
+                                                Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                                </Button>
+                                            </StackPanel>
+                                        </materialDesign:PopupBox>
+                                    </StackPanel>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </materialDesign:Card>
+
+                        <materialDesign:Card
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Height="{Binding Path=ActualHeight, ElementName= GridAccount, Converter={StaticResource MathConverter}, ConverterParameter=@VALUE-90}"
+                            Margin="15 30 30 30"
+                            Background="{DynamicResource PrimaryHueLightBrush}"
+                            Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <StackPanel>
+                                    <materialDesign:ColorZone
+                                        Mode="PrimaryMid"
+                                        Padding="16">
+                                        <DockPanel LastChildFill="False">
+                                            <Button DockPanel.Dock="Left"
+                                                Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                                Width="auto"
+                                                ToolTip="New record"
+                                                Click="Account_buttonnewrecord_Clicked"
+                                                materialDesign:RippleAssist.Feedback="#DD000000"
+                                                >
+                                                <materialDesign:PackIcon
+                                                    Kind="Add"
+                                                    Foreground="Black"
+                                                    Margin="0 0 0 0"/>
+                                            </Button>
+                                            <Button DockPanel.Dock="Right"
+                                                Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                                Width="auto"
+                                                Visibility="Collapsed"
+                                                ToolTip="Save"
+                                                Background="DarkGray"
+                                                BorderBrush="DarkGray"
+                                                x:Name="Account_PageButtonOkSave" 
+                                                Click="Account_PageButtonOkSave_clicked"
+                                                >
+                                                <materialDesign:PackIcon
+                                                    Kind="Check"
+                                                    Foreground="Black"
+                                                    Margin="0 0 0 0"/>
+                                            </Button>
+                                            <Button DockPanel.Dock="Right" 
+                                                    Margin="5 0 0 0"
+                                                x:Name="Account_PageButtonDelete"
+                                                Click="Account_buttondelete"
+                                                Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                                Width="auto"
+                                                ToolTip="Delete"
+                                                Background="DarkGray"
+                                                BorderBrush="DarkGray"
+                                                >
+                                                <materialDesign:PackIcon
+                                                    Kind="TrashCanOutline"
+                                                    Foreground="Black"
+                                                    Margin="0 0 0 0"/>
+                                            </Button>
+                                            <Button DockPanel.Dock="Right"
+                                                Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                                Width="auto"
+                                                ToolTip="Change"
+                                                Background="DarkGray"
+                                                BorderBrush="DarkGray"
+                                                x:Name="Account_PageButtonFix" Click="Account_PageButtonFix_clicked"
+                                                >
+                                                <materialDesign:PackIcon
+                                                    Kind="Pen"
+                                                    Foreground="Black"
+                                                    Margin="0 0 0 0"/>
+                                            </Button>
+                                            <Button DockPanel.Dock="Right"
+                                                Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                                Width="auto"
+                                                ToolTip="Save"
+                                                Background="DarkGray"
+                                                BorderBrush="DarkGray"
+                                                Visibility="Collapsed"
+                                                x:Name="Account_PageButtonSave" Click="Account_PageButtonSave_clicked"
+                                                >
+                                                <materialDesign:PackIcon
+                                                    Kind="ContentSave"
+                                                    Foreground="Black"
+                                                    Margin="0 0 0 0"/>
+                                            </Button>
+                                        </DockPanel>
+                                    </materialDesign:ColorZone>
+                                    <StackPanel>
+                                        <Frame Source="AccountPage1.xaml"
+                                               NavigationUIVisibility="Hidden"
+                                               Name="AccountFrame">
+                                        </Frame>
+                                    </StackPanel>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </materialDesign:Card>
+                    </Grid>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <materialDesign:PackIcon Kind="GithubCircle" Foreground="{DynamicResource PrimaryHueLightBrush}" Padding="20 0 20 0"/>
+                    </TabItem.Header>
+                    <Grid
+                        Height="256"
+                        Width="200">
+                        <Grid.RowDefinitions>
+                            <RowDefinition
+                                Height="160" />
+                            <RowDefinition
+                                Height="*" />
+                        </Grid.RowDefinitions>
+                        <materialDesign:Card
+                            VerticalAlignment="Stretch"
+                            UniformCornerRadius="6"
+                            Background="{DynamicResource PrimaryHueMidBrush}"
+                            Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
+                            <materialDesign:PackIcon
+                                Kind="AccountCircle"
+                                Height="128"
+                                Width="128"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center" />
+                        </materialDesign:Card>
+                        <StackPanel
+                            Grid.Row="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            <TextBlock><Run Text="Nguyễn Quang Huy"/></TextBlock>
+                            <Button
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Foreground="Black"
+                                Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                Margin="0 4 0 0" Content="CONTACT"/>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+            </dragablz:TabablzControl>
+        </Grid>
+    </Grid>
+</Window>
