@@ -65,3 +65,70 @@ C:\Users\DELL\Desktop\work space\work space\obj\Debug\WindowEvent.baml
 C:\Users\DELL\Desktop\work space\work space\obj\Debug\work space.csprojAssemblyReference.cache
 C:\Users\DELL\Desktop\work space\work space\obj\Debug\Custom controls\HomeCard.g.cs
 C:\Users\DELL\Desktop\work space\work space\obj\Debug\Custom controls\HomeCard.baml
+D:\myprojects\work space\work space\bin\Debug\work space.exe.config
+D:\myprojects\work space\work space\bin\Debug\work space.exe
+D:\myprojects\work space\work space\bin\Debug\work space.pdb
+D:\myprojects\work space\work space\bin\Debug\BespokeFusion.dll
+D:\myprojects\work space\work space\bin\Debug\ControlzEx.dll
+D:\myprojects\work space\work space\bin\Debug\Dragablz.dll
+D:\myprojects\work space\work space\bin\Debug\MahApps.Metro.dll
+D:\myprojects\work space\work space\bin\Debug\MaterialDesignColors.dll
+D:\myprojects\work space\work space\bin\Debug\MaterialDesignThemes.Wpf.dll
+D:\myprojects\work space\work space\bin\Debug\System.Windows.Interactivity.dll
+D:\myprojects\work space\work space\bin\Debug\Xceed.Wpf.AvalonDock.dll
+D:\myprojects\work space\work space\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+D:\myprojects\work space\work space\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+D:\myprojects\work space\work space\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+D:\myprojects\work space\work space\bin\Debug\Xceed.Wpf.Toolkit.dll
+D:\myprojects\work space\work space\bin\Debug\ControlzEx.pdb
+D:\myprojects\work space\work space\bin\Debug\Dragablz.pdb
+D:\myprojects\work space\work space\bin\Debug\Dragablz.xml
+D:\myprojects\work space\work space\bin\Debug\MahApps.Metro.pdb
+D:\myprojects\work space\work space\bin\Debug\MahApps.Metro.xml
+D:\myprojects\work space\work space\bin\Debug\MaterialDesignThemes.Wpf.pdb
+D:\myprojects\work space\work space\bin\Debug\MaterialDesignThemes.Wpf.xml
+D:\myprojects\work space\work space\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
+D:\myprojects\work space\work space\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
+D:\myprojects\work space\work space\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
+D:\myprojects\work space\work space\bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll
+D:\myprojects\work space\work space\bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll
+D:\myprojects\work space\work space\bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
+D:\myprojects\work space\work space\bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll
+D:\myprojects\work space\work space\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
+D:\myprojects\work space\work space\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
+D:\myprojects\work space\work space\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+D:\myprojects\work space\work space\obj\Debug\work space.csprojAssemblyReference.cache
+D:\myprojects\work space\work space\obj\Debug\AccountPage1.g.cs
+D:\myprojects\work space\work space\obj\Debug\AccountPage2.g.cs
+D:\myprojects\work space\work space\obj\Debug\AccountPage3.g.cs
+D:\myprojects\work space\work space\obj\Debug\AccountPage4.g.cs
+D:\myprojects\work space\work space\obj\Debug\Custom controls\HomeCard.g.cs
+D:\myprojects\work space\work space\obj\Debug\Custom controls\MyMessageBox.g.cs
+D:\myprojects\work space\work space\obj\Debug\Custom controls\ScheduleCard.g.cs
+D:\myprojects\work space\work space\obj\Debug\MainWindow.g.cs
+D:\myprojects\work space\work space\obj\Debug\windowAddCategory.g.cs
+D:\myprojects\work space\work space\obj\Debug\WindowAddScheduleItem.g.cs
+D:\myprojects\work space\work space\obj\Debug\WindowEvent.g.cs
+D:\myprojects\work space\work space\obj\Debug\App.g.cs
+D:\myprojects\work space\work space\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\myprojects\work space\work space\obj\Debug\work space_MarkupCompile.cache
+D:\myprojects\work space\work space\obj\Debug\work space_MarkupCompile.lref
+D:\myprojects\work space\work space\obj\Debug\App.baml
+D:\myprojects\work space\work space\obj\Debug\AccountPage1.baml
+D:\myprojects\work space\work space\obj\Debug\AccountPage2.baml
+D:\myprojects\work space\work space\obj\Debug\AccountPage3.baml
+D:\myprojects\work space\work space\obj\Debug\AccountPage4.baml
+D:\myprojects\work space\work space\obj\Debug\Custom controls\HomeCard.baml
+D:\myprojects\work space\work space\obj\Debug\Custom controls\MyMessageBox.baml
+D:\myprojects\work space\work space\obj\Debug\Custom controls\ScheduleCard.baml
+D:\myprojects\work space\work space\obj\Debug\MainWindow.baml
+D:\myprojects\work space\work space\obj\Debug\windowAddCategory.baml
+D:\myprojects\work space\work space\obj\Debug\WindowAddScheduleItem.baml
+D:\myprojects\work space\work space\obj\Debug\WindowEvent.baml
+D:\myprojects\work space\work space\obj\Debug\work space.g.resources
+D:\myprojects\work space\work space\obj\Debug\work_space.Properties.Resources.resources
+D:\myprojects\work space\work space\obj\Debug\work space.csproj.GenerateResource.cache
+D:\myprojects\work space\work space\obj\Debug\work space.csproj.CoreCompileInputs.cache
+D:\myprojects\work space\work space\obj\Debug\work space.csproj.CopyComplete
+D:\myprojects\work space\work space\obj\Debug\work space.exe
+D:\myprojects\work space\work space\obj\Debug\work space.pdb

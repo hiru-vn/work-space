@@ -95,7 +95,6 @@ namespace work_space
             foreach (TextBox tb in FindVisualChildren<TextBox>(this))
             {
                 tb.IsEnabled = false;
-                tb.Text = "lol";
             }
         }
         public void EnableTextbox()

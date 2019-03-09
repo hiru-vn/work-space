@@ -17,7 +17,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="" Width="900" Height="auto" MinWidth="400"
+        Title="" Width="900" Height="690" MinWidth="400"
         WindowStartupLocation="CenterScreen" 
         Icon="pack://siteoforigin:,,,/Resources/WSico2.png" SizeChanged="Window_sizechange">
     <Window.Resources>
@@ -67,20 +67,30 @@
                                     <Grid Grid.Column="0" Grid.RowSpan="2">
                                         <Image Source="pack://siteoforigin:,,,/Resources/WSico2.png" HorizontalAlignment="Right"></Image>
                                     </Grid>
-                                    <Grid Grid.Row="0" Grid.Column="1">
+                                    <Grid Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom">
                                         <TextBlock FontWeight="Bold" Padding="10" HorizontalAlignment="Left" FontSize="28" VerticalAlignment="Bottom" Foreground="#FF673AB7"><Run Text="WELCOME TO WORK SPACE"/></TextBlock>
                                     </Grid>
-                                    <Grid Grid.Row="1" Grid.Column="1">
-                                        <TextBlock Foreground="CadetBlue" Margin="6 0 0 0" VerticalAlignment="Top">
-                                        <Hyperlink NavigateUri="http://www.google.com" RequestNavigate="Hyperlink_RequestNavigate"/>
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon Kind="Magnify"></materialDesign:PackIcon>
-                                            <TextBlock>Explore</TextBlock>
-                                        </StackPanel>
-                                    </TextBlock>
+                                    <Grid Grid.Row="1" Grid.Column="1" VerticalAlignment="Top">
+                                        <Button
+                                            Style="{StaticResource MaterialDesignFlatButton}">
+                                            <TextBlock Margin="-10 0 0 0" Foreground="CadetBlue" VerticalAlignment="Top">
+                                                <Hyperlink TextDecorations="" NavigateUri="https://github.com/huynguyen1999kh/work-space" RequestNavigate="Hyperlink_RequestNavigate">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <materialDesign:PackIcon Kind="Magnify"></materialDesign:PackIcon>
+                                                        <TextBlock>Explore</TextBlock>
+                                                    </StackPanel>
+                                                </Hyperlink>
+                                            </TextBlock>
+                                        </Button>
                                     </Grid>
                                 </Grid>
                             </Grid>
+                            <StackPanel DockPanel.Dock="Top" VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="panel_rating">
+                                <TextBlock Foreground="#FF673AB7" HorizontalAlignment="Center">your rating</TextBlock>
+                                <materialDesign:RatingBar VerticalAlignment="Top" HorizontalAlignment="Center"
+                                          Value="0" x:Name="RatingBar2" ValueChanged="RateChange"
+                                         />
+                            </StackPanel>
                             <Grid DockPanel.Dock="Bottom" Height="auto" >
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20">
                                     <Customcontrols:HomeCard x:Name="Home_cardSchedule"></Customcontrols:HomeCard>
@@ -111,7 +121,7 @@
                                         Margin="0 0 10 0">2 weeks routine</TextBlock>
                                         <ToggleButton
                                         Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                                        ToolTip="on/off" Click="SwitchRoutine" />
+                                        ToolTip="off/on" Click="SwitchRoutine" />
                                     </StackPanel>
                                     <Button x:Name="Schedule_buttonweek1" IsEnabled="False" Margin="0 0 3 0" Visibility="Collapsed" Click="SwitchRoutineButtonClick">WEEK 1</Button>
                                     <Button x:Name="Schedule_buttonweek2" Visibility="Collapsed" Click="SwitchRoutineButtonClick">WEEK 2</Button>
@@ -322,12 +332,12 @@
                                         MinWidth="200"
                                         Width="600"
                                         Name="TextBoxTask"
-                                        VerticalAlignment="Center" KeyDown="TextBoxTask_KeyDown" />
-                                <Button
+                                        VerticalAlignment="Center" KeyDown="TextBoxTask_KeyDown" KeyUp="TextBoxTask_KeyUp" />
+                                <Button x:Name="Task_ButtonClearText" Visibility="Hidden"
                                         Style="{DynamicResource MaterialDesignToolButton}"
-                                        Grid.Column="2">
+                                        Grid.Column="2" Click="Task_ButtonClearText_click">
                                     <materialDesign:PackIcon
-                                            Kind="Microphone"
+                                            Kind="Xamarin"
                                             Opacity=".56"
                                             Margin="8 0 0 0" />
                                 </Button>
@@ -432,13 +442,11 @@
                                                             Content="x"
                                                             IsChecked="{Binding Checked}"
                                                             Style="{StaticResource MaterialDesignActionDarkCheckBox}"
-                                                            ToolTip="MaterialDesignActionDarkCheckBox"
                                                             Tag="{Binding IDTask}" Click="Task_checkboxchecked_Clicked"/>
                                                             <TextBlock Text="    "></TextBlock>
                                                             <Button Height="31" Width="31"
                                                             Tag="{Binding IDTask}"
                                                             Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                                            ToolTip="MaterialDesignFloatingActionMiniLightButton" 
                                                             Click="Task_buttondelete_Clicked">
                                                                 <materialDesign:PackIcon
                                                                 Kind="TrashCanOutline"
@@ -461,22 +469,12 @@
                         <TextBlock FontWeight="Bold" Foreground="WhiteSmoke" Padding="20 0 20 0"><Run Text="DIARY"/></TextBlock>
                     </TabItem.Header>
                     <Grid Margin="10 10 20 10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"></RowDefinition>
-                            <RowDefinition Height="auto"></RowDefinition>
-                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.2*"></ColumnDefinition>
                             <ColumnDefinition Width="0.8*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Grid Grid.Row="0" Grid.Column="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition
-                                    Height="auto" />
-                                    <RowDefinition
-                                    Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Grid Grid.Row="0" Background="MediumPurple">
+                        <StackPanel Grid.Column="0">
+                            <Grid Background="MediumPurple">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition
                                                 Width="Auto" />
@@ -514,15 +512,13 @@
                                                 Margin="0 0 0 0"/>
                                     </Button>
                                 </Grid>
-                            <Viewbox Grid.Row="1">
+                            <Viewbox>
                                 <Calendar
                                 Width="auto" Height="auto"
                                 x:Name="Diary_calendar"
                                 SelectedDatesChanged="Diary_calendar_SelectedDatesChanged"
                                 Margin="0 0 0 0" />
                             </Viewbox>
-                        </Grid>
-                        <Grid Grid.Row="1" Grid.Column="0">
                             <Viewbox>
                             <materialDesign:DialogHost DialogClosing="Diary_dialoghost_Closing"
                             HorizontalAlignment="Center"
@@ -606,8 +602,8 @@
                                 </Border>
                             </materialDesign:DialogHost>
                             </Viewbox>
-                        </Grid>
-                        <Grid Grid.Column="1" Grid.RowSpan="2" Name="GridDiaryContent">
+                        </StackPanel>
+                        <Grid Grid.Column="1" Name="GridDiaryContent" VerticalAlignment="Stretch">
                             <StackPanel Orientation="Vertical">
                                 <DockPanel Height="auto" LastChildFill="False">
                                     <Button Height="25" Width="auto"
@@ -703,7 +699,7 @@
                                 FontSize="{Binding Path=SelectedValue,ElementName=Story_comboboxfontsize}"
                                 Foreground="{Binding Path=SelectedValue, ElementName=Story_comboboxfontcolor}"
                                 FontFamily="{Binding Path=SelectedValue, ElementName=Story_comboboxfontfamily}"
-                                Height="{Binding Path=ActualHeight, ElementName= GridDiaryContent, Converter={StaticResource MathConverter}, ConverterParameter=@VALUE-35}"
+                                Height="{Binding Path=ActualHeight, ElementName= GridDiaryContent, Converter={StaticResource MathConverter}, ConverterParameter=@VALUE-46}"
                                 VerticalScrollBarVisibility="Auto"
                                 materialDesign:HintAssist.Hint="Your story here."/>
                             </StackPanel>
@@ -940,39 +936,102 @@
                     <TabItem.Header>
                         <materialDesign:PackIcon Kind="GithubCircle" Foreground="{DynamicResource PrimaryHueLightBrush}" Padding="20 0 20 0"/>
                     </TabItem.Header>
-                    <Grid
-                        Height="256"
-                        Width="200">
-                        <Grid.RowDefinitions>
-                            <RowDefinition
-                                Height="160" />
-                            <RowDefinition
-                                Height="*" />
-                        </Grid.RowDefinitions>
-                        <materialDesign:Card
-                            VerticalAlignment="Stretch"
-                            UniformCornerRadius="6"
-                            Background="{DynamicResource PrimaryHueMidBrush}"
-                            Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
-                            <materialDesign:PackIcon
-                                Kind="AccountCircle"
-                                Height="128"
-                                Width="128"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center" />
-                        </materialDesign:Card>
-                        <StackPanel
-                            Grid.Row="1"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
-                            <TextBlock><Run Text="Nguyễn Quang Huy"/></TextBlock>
-                            <Button
-                                Style="{StaticResource MaterialDesignFlatButton}"
-                                Foreground="Black"
-                                Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                                Margin="0 4 0 0" Content="CONTACT"/>
-                        </StackPanel>
-                    </Grid>
+                    <Viewbox x:Name="Creater_Card" Height="{Binding Path=ActualHeight, ElementName= MainTabControl, Converter={StaticResource MathConverter}, ConverterParameter=@VALUE*0.45 }" Width="auto">
+                        <materialDesign:Flipper HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Style="{StaticResource MaterialDesignCardFlipper}">
+                        <materialDesign:Flipper.FrontContent>
+                            <Grid
+                              Height="256"
+                              Width="200">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition
+                                    Height="160" />
+                                    <RowDefinition
+                                    Height="*" />
+                                </Grid.RowDefinitions>
+                                <materialDesign:ColorZone
+                                Mode="PrimaryLight"
+                                VerticalAlignment="Stretch">
+                                    <materialDesign:PackIcon Foreground="#FF673AB7"
+                                      Kind="AccountCircle"
+                                      Height="128"
+                                      Width="128"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Center" />
+                                </materialDesign:ColorZone>
+                                <StackPanel
+                                Grid.Row="1"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                                    <TextBlock>
+                                    Nguyễn Quang Huy
+                                    </TextBlock>
+                                    <Button
+                                      Style="{StaticResource MaterialDesignFlatButton}"
+                                      Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                      Margin="0 4 0 0"  Foreground="#FF673AB7">
+                                        CONTACT
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </materialDesign:Flipper.FrontContent>
+                        <materialDesign:Flipper.BackContent>
+                            <Grid x:Name="Contact_info"
+                              Height="256"
+                              Width="200">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition
+                                    Height="Auto" />
+                                    <RowDefinition
+                                    Height="*" />
+                                </Grid.RowDefinitions>
+                                <materialDesign:ColorZone
+                                Mode="Accent"
+                                Padding="6">
+                                    <StackPanel
+                                    Orientation="Horizontal">
+                                        <Button
+                                        Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                        Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                        HorizontalAlignment="Left">
+                                            <materialDesign:PackIcon
+                                          Kind="ArrowLeft"
+                                          HorizontalAlignment="Right" />
+                                        </Button>
+                                        <TextBlock
+                                        Margin="8 0 0 0"
+                                        VerticalAlignment="Center">
+                                      CONTACT
+                                        </TextBlock>
+                                    </StackPanel>
+                                </materialDesign:ColorZone>
+                                    <StackPanel Grid.Row="1" Margin="0 10 0 0" VerticalAlignment="Top" HorizontalAlignment="Center">
+                                        <TextBlock Foreground="#FF673AB7" HorizontalAlignment="Center">your rating</TextBlock>
+                                        <materialDesign:RatingBar VerticalAlignment="Top" HorizontalAlignment="Center"
+                                          Value="0"
+                                          x:Name="RatingBar1" ValueChanged="RateChange"
+                                         />
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Foreground="#FF673AB7" Margin="0 -40 0 15" HorizontalAlignment="Center" TextWrapping="Wrap" FontFamily="Segoe UI Semibold">Feel free to ask,</TextBlock>
+                                        <TextBlock Foreground="#FF673AB7" HorizontalAlignment="Center" Margin="0 -20 0 0" TextWrapping="Wrap" FontFamily="Segoe UI Semibold">take, remark and contribute</TextBlock>
+                                    </StackPanel>
+                                    <Viewbox Margin="25 90 25 0" Grid.Row="1">
+                                        <StackPanel>
+                                            <StackPanel Orientation="Horizontal"
+                                            Margin="0 6 0 0"
+                                            Width="auto">
+                                                <materialDesign:PackIcon ToolTip="quanghuy1998kh@gmail.com" Foreground="#FF673AB7" Kind="Gmail" MouseDown="MoveToGmailSite"></materialDesign:PackIcon>
+                                                <materialDesign:PackIcon ToolTip="https://www.facebook.com/quanghuy1999kh"  Foreground="#FF673AB7" Kind="FacebookBox" MouseDown="MoveToFacebookSite"></materialDesign:PackIcon>
+                                                <materialDesign:PackIcon ToolTip="https://twitter.com/quanghuy1998kh"  Foreground="#FF673AB7" Kind="TwitterCircle" MouseDown="MoveToTwitterSite"></materialDesign:PackIcon>
+                                                <materialDesign:PackIcon ToolTip="https://github.com/huynguyen1999kh/work-space" Foreground="#FF673AB7" Kind="GithubCircle" MouseDown="MoveToGitHubSite"></materialDesign:PackIcon>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Viewbox>
+                                </Grid>
+                        </materialDesign:Flipper.BackContent>
+                    </materialDesign:Flipper>
+                    </Viewbox>
                 </TabItem>
             </dragablz:TabablzControl>
         </Grid>

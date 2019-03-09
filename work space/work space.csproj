@@ -106,9 +106,11 @@
       <DependentUpon>ScheduleCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="DAO\EventDAO.cs" />
+    <Compile Include="DAO\RateDAO.cs" />
     <Compile Include="DAO\ScheduleDAO.cs" />
     <Compile Include="DTO\AccountCustomField.cs" />
     <Compile Include="DTO\Event.cs" />
+    <Compile Include="DTO\Rate.cs" />
     <Compile Include="DTO\ScheduleItem.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -40,288 +40,7 @@ namespace work_space
             TaskDefault();
             DiaryDefault();
             AccountsDefault();
-            DocumentDefault();
         }
-
-        #region Task
-        private void TaskDefault()
-        {
-            this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTaskByDate(DateTime.Now).DefaultView;
-        }
-        private void TextBoxTask_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                string content = this.TextBoxTask.Text;
-                if (content != "" && content != null)
-                    TaskDAO.Instance.InsertTask(content);
-                TaskDefault();
-            }
-        }
-        private void Task_comboboxday_DropDownClosed(object sender, EventArgs e)
-        {
-            string filter = Task_comboboxsort.SelectedValue.ToString();
-            if (filter == "Priority") filter = "IDPriority";
-            string filter2 = Task_comboboxday.SelectedValue.ToString();
-            if (filter2 == "Today")
-                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTaskByDate(DateTime.Now, filter).DefaultView;
-            else if (filter2 == "Tomorrow")
-                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTaskByDate(DateTime.Now.AddDays(1), filter).DefaultView;
-            else if (filter2 == "This week")
-                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTaskByWeek(DateTime.Now, filter).DefaultView;
-            else if (filter2 == "This month")
-                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTaskByMonth(DateTime.Now, filter).DefaultView;
-            else if (filter2 == "Anytime")
-                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTask(filter).DefaultView;
-        }
-
-        private void Task_comboboxsort_SelectionChanged(object sender, EventArgs e)
-        {
-            string filter = Task_comboboxsort.SelectedValue.ToString();
-            if (filter == "Priority") filter = "IDPriority";
-            string filter2 = Task_comboboxday.SelectedValue.ToString();
-            if (filter2 == "Today")
-                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTaskByDate(DateTime.Now, filter).DefaultView;
-            else if (filter2 == "Tomorrow")
-                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTaskByDate(DateTime.Now.AddDays(1), filter).DefaultView;
-            else if (filter2 == "This week")
-                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTaskByWeek(DateTime.Now, filter).DefaultView;
-            else if (filter2 == "This month")
-                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTaskByMonth(DateTime.Now, filter).DefaultView;
-            else if (filter2 == "Anytime")
-                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTask(filter).DefaultView;
-        }
-        private void Task_comboboxpriority_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            int priority = cb.SelectedIndex;
-            int id = -1;
-            if (cb.Tag != null) id = int.Parse(cb.Tag.ToString());
-            if (id >= 0) TaskDAO.Instance.UpdateTaskPriorityByID(id, priority);
-        }
-        private void Task_checkboxchecked_Clicked(object sender, RoutedEventArgs e)
-        {
-            CheckBox cb = sender as CheckBox;
-            int id = -1;
-            if (cb.Tag != null) id = int.Parse(cb.Tag.ToString());
-            int isChecked = -1;
-            if (cb.IsChecked == true) isChecked = 1;
-            if (cb.IsChecked == false) isChecked = 0;
-            if (id >= 0 && isChecked >= 0) TaskDAO.Instance.UpdateTaskCheckedByID(id, isChecked);
-        }
-        private void Task_buttondelete_Clicked(object sender, RoutedEventArgs e)
-        {
-            Button btn = sender as Button;
-            int id = -1;
-            if (btn.Tag != null) id = int.Parse(btn.Tag.ToString());
-            if (id >= 0 && MyMessageBox.setContent("Delete this task?").ShowDialog() == true)
-            {
-                TaskDAO.Instance.DeleteTaskByID(id);
-                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTask().DefaultView;
-            }
-        }
-        private void Task_calendardate_SelectionChange(object sender, SelectionChangedEventArgs e)
-        {
-            DatePicker datePicker = sender as DatePicker;
-            StackPanel stackPanel = datePicker.Parent as StackPanel;
-            int id = -1;
-            if (stackPanel.Tag != null) id = int.Parse(stackPanel.Tag.ToString());
-            foreach (object child in stackPanel.Children)
-            {
-                TimePicker timePicker;
-                if (child is TimePicker)
-                {
-                    timePicker = child as TimePicker;
-                    if (timePicker.SelectedTime != null)
-                    {
-                        DateTime dtd = datePicker.SelectedDate ?? DateTime.Now;
-                        DateTime dtt = timePicker.SelectedTime ?? DateTime.Now;
-                        DateTime? dateTime = dtd.Add(dtt.TimeOfDay);
-                        TaskDAO.Instance.UpdateTaskDeadlineByID(id, dateTime);
-                    }
-                }
-            }
-        }
-        private void Task_calendartime_SelectionChange(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
-        {
-            TimePicker timePicker = sender as TimePicker;
-            StackPanel stackPanel = timePicker.Parent as StackPanel;
-            int id = -1;
-            if (stackPanel.Tag != null) id = int.Parse(stackPanel.Tag.ToString());
-            foreach (object child in stackPanel.Children)
-            {
-                DatePicker datePicker;
-                if (child is DatePicker)
-                {
-                    datePicker = child as DatePicker;
-                    if (datePicker.SelectedDate != null)
-                    {
-                        DateTime dtd = datePicker.SelectedDate ?? DateTime.Now;
-                        DateTime dtt = timePicker.SelectedTime ?? DateTime.Now;
-                        DateTime? dateTime = dtd.Add(dtt.TimeOfDay);
-                        TaskDAO.Instance.UpdateTaskDeadlineByID(id, dateTime);
-                    }
-                }
-            }
-        }
-        #endregion
-
-        #region Diary
-        public void DiaryDefault()
-        {
-            this.Diary_calendar.SelectedDate = DateTime.Now;
-            this.Story_textbox.Foreground = Brushes.Black;
-        }
-        public void GetListDiaryTitle()
-        {
-            List<string> diarytitle = DiaryDAO.Instance.GetListDiaryTitleByDate(this.Diary_calendar.SelectedDate);
-            this.Story_titlelistbox.Items.Clear();
-            foreach (string s in diarytitle)
-            {
-                this.Story_titlelistbox.Items.Add(s);
-            }
-            if (diarytitle.Count > 0)
-                Story_titlelistbox.SelectedIndex = 0;
-        }
-        private void Story_textboxfastadd_KeyUp(object sender, KeyEventArgs e)
-        {
-            TextBox tb = sender as TextBox;
-            if (!string.IsNullOrEmpty(tb.Text))
-            {
-                this.Diary_ButtonClearTextbox.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                this.Diary_ButtonClearTextbox.Visibility = Visibility.Collapsed;
-            }
-        }
-        private void Diary_ButtonClearTextbox_Clicked(object sender, RoutedEventArgs e)
-        {
-            this.Story_textboxfastadd.Clear();
-            (sender as Button).Visibility = Visibility.Collapsed;
-        }
-        private void Story_listboxfontstyle_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            List<ListBoxItem> mySelectedItems = new List<ListBoxItem>();
-            ListBox lb = sender as ListBox;
-            bool flagBold = false, flagItalic = false, flagUnderline = false;
-            foreach (ListBoxItem item in lb.SelectedItems)
-            {
-                if (item.Tag != null)
-                {
-                    if (item.Tag.ToString() == "Bold") { this.Story_textbox.FontWeight = FontWeights.Bold; flagBold = true; }
-                    else if (item.Tag.ToString() == "Italic") { this.Story_textbox.FontStyle = FontStyles.Italic; flagItalic = true; }
-                    else if (item.Tag.ToString() == "Underline") { this.Story_textbox.TextDecorations = TextDecorations.Underline; flagUnderline = true; }
-                }
-            }
-            if (flagBold == false) this.Story_textbox.FontWeight = FontWeights.Normal;
-            if (flagItalic == false) this.Story_textbox.FontStyle = FontStyles.Normal;
-            if (flagUnderline == false) this.Story_textbox.TextDecorations = null;
-        }
-        private void Diary_calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
-        {
-            GetListDiaryTitle();
-        }
-        private void Diary_dialoghost_Closing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs)
-        {
-            MaterialDesignThemes.Wpf.DialogHost dialog = sender as MaterialDesignThemes.Wpf.DialogHost;
-            if (!Equals(eventArgs.Parameter, true)) return;
-            if (!string.IsNullOrWhiteSpace(Story_textboxadd.Text))
-            {
-                string title = Story_textboxadd.Text.Trim();
-                if (!Story_titlelistbox.Items.Contains(title))
-                {
-                    this.Story_titlelistbox.Items.Add(title);
-
-                    DiaryDAO.Instance.InsertDiary(this.Diary_calendar.SelectedDate, title);
-                }
-            }
-            if (Story_titlelistbox.Items.Count > 0)
-                Story_titlelistbox.SelectedIndex = 0;
-        }
-        private void Diary_titlelistbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            this.Story_textbox.Text = "";
-            this.Story_textbox.FontWeight = FontWeights.Normal;
-            this.Story_textbox.FontStyle = FontStyles.Normal;
-            this.Story_textbox.TextDecorations = null;
-            if (this.Story_titlelistbox.Items.Count > 0)
-            {
-                Diary diary = DiaryDAO.Instance.GetDiaryByDateAndTitle(this.Diary_calendar.SelectedDate, this.Story_titlelistbox.SelectedValue.ToString());
-                if (!string.IsNullOrWhiteSpace(diary.Story))
-                {
-                    this.Story_textbox.Text = diary.Story;
-                    this.Story_textbox.FontFamily = new FontFamily(diary.Fontfamily);
-                    this.Story_textbox.Foreground = new System.Windows.Media.SolidColorBrush((Color)ColorConverter.ConvertFromString(diary.Fontcolor));
-                    this.Story_textbox.FontSize = diary.Fontsize;
-                    if (diary.Fontstyle == "Italic") { this.Story_textbox.FontStyle = FontStyles.Italic; }
-                    else if (diary.Fontstyle == "Bold") { this.Story_textbox.FontWeight = FontWeights.Bold; }
-                    else if (diary.Fontstyle == "Underline") { this.Story_textbox.TextDecorations = TextDecorations.Underline; }
-                }
-            }
-        }
-        private void Story_buttonsave_Clicked(object sender, RoutedEventArgs e)
-        {
-            if (this.Story_titlelistbox.Items.Count > 0)
-                DiaryDAO.Instance.UpdateDiaryStory(this.Diary_calendar.SelectedDate, this.Story_titlelistbox.SelectedItem.ToString(), this.Story_textbox.Text);
-            else
-            {
-                string content = this.Story_textbox.Text;
-                if (!string.IsNullOrWhiteSpace(content) && !string.IsNullOrEmpty(content))
-                    DiaryDAO.Instance.InsertDiary(this.Diary_calendar.SelectedDate, DateTime.Now.ToShortTimeString(), content);
-            }
-            GetListDiaryTitle();
-        }
-
-        private void Story_comboboxfontfamily_SelectionChange(object sender, SelectionChangedEventArgs e)
-        {
-            this.Story_textbox.FontFamily = new FontFamily(this.Story_comboboxfontfamily.SelectedValue.ToString());
-            if (this.Story_titlelistbox.Items.Count > 0)
-            {
-                DiaryDAO.Instance.UpdateDiaryFontFamily(this.Diary_calendar.SelectedDate, this.Story_titlelistbox.SelectedItem.ToString(), (sender as ComboBox).SelectedValue.ToString());
-            }
-        }
-
-        private void Story_comboboxfontcolor_SelectionChange(object sender, SelectionChangedEventArgs e)
-        {
-            this.Story_textbox.Foreground = new System.Windows.Media.SolidColorBrush((Color)ColorConverter.ConvertFromString((sender as ComboBox).SelectedValue.ToString()));
-            if (this.Story_titlelistbox.Items.Count > 0)
-            {
-                DiaryDAO.Instance.UpdateDiaryFontColor(this.Diary_calendar.SelectedDate, this.Story_titlelistbox.SelectedItem.ToString(), (sender as ComboBox).SelectedValue.ToString());
-            }
-        }
-
-        private void Story_comboboxfontsize_SelectionChange(object sender, SelectionChangedEventArgs e)
-        {
-            this.Story_textbox.FontSize = int.Parse((sender as ComboBox).SelectedValue.ToString());
-            if (this.Story_titlelistbox.Items.Count > 0)
-            {
-                DiaryDAO.Instance.UpdateDiaryFontSize(this.Diary_calendar.SelectedDate, this.Story_titlelistbox.SelectedItem.ToString(), int.Parse((sender as ComboBox).SelectedValue.ToString()));
-            }
-        }
-        private void Story_textboxfastadd_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                string content = this.Story_textboxfastadd.Text;
-                if (!string.IsNullOrWhiteSpace(content) && !string.IsNullOrEmpty(content))
-                    DiaryDAO.Instance.InsertDiary(DateTime.Now, DateTime.Now.ToShortTimeString(), content);
-            }
-            GetListDiaryTitle();
-        }
-
-        private void Story_buttondelete_Clicked(object sender, RoutedEventArgs e)
-        {
-            if (this.Story_titlelistbox.Items.Count > 0)
-            {
-                if (MyMessageBox.setContent("Bạn thực sự muốn xóa?").ShowDialog() == true)
-                {
-                    DiaryDAO.Instance.DeleteDiary(this.Diary_calendar.SelectedDate, this.Story_titlelistbox.SelectedItem.ToString());
-                    GetListDiaryTitle();
-                }
-            }
-        }
-        #endregion
 
         #region Home
         public void HomeDefault()
@@ -330,11 +49,30 @@ namespace work_space
             this.Home_cardTask.SetSource("pack://siteoforigin:,,,/Resources/task.png").SetTitle("Task").SetContent("Never miss a deadline again").SetTabIndex(2);
             this.Home_cardDiary.SetSource("pack://siteoforigin:,,,/Resources/diary.png").SetTitle("Diary").SetContent("Release inner thoughts").SetTabIndex(3);
             this.Home_cardAccount.SetSource("pack://siteoforigin:,,,/Resources/account.png").SetTitle("Account").SetContent("Never forget your account").SetTabIndex(4);
+            this.RatingBar1.Value = RateDAO.Instance.GetLatestRatePoint();
+            this.RatingBar2.Value = RateDAO.Instance.GetLatestRatePoint();
         }
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
+        }
+        private void Window_sizechange(object sender, SizeChangedEventArgs e)
+        {
+            if (this.ActualWidth < 1000)
+                this.Home_cardAccount.Visibility = Visibility.Collapsed;
+            else
+                this.Home_cardAccount.Visibility = Visibility.Visible;
+            if (this.ActualHeight < 686)
+                this.panel_rating.Visibility = Visibility.Collapsed;
+            else
+                this.panel_rating.Visibility = Visibility.Visible;
+        }
+        private void RateChange(object sender, RoutedPropertyChangedEventArgs<int> e)
+        {
+            RateDAO.Instance.InsertRate((sender as RatingBar).Value);
+            this.RatingBar1.Value = RateDAO.Instance.GetLatestRatePoint();
+            this.RatingBar2.Value = RateDAO.Instance.GetLatestRatePoint();
         }
         #endregion
 
@@ -539,6 +277,304 @@ namespace work_space
             if (window.ShowDialog() == true)
             {
                 GetListEvent();
+            }
+        }
+        #endregion
+
+        #region Task
+        private void TaskDefault()
+        {
+            this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTaskByDate(DateTime.Now).DefaultView;
+        }
+        private void TextBoxTask_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string content = this.TextBoxTask.Text;
+                if (content != "" && content != null)
+                    TaskDAO.Instance.InsertTask(content);
+                TaskDefault();
+            }
+        }
+        private void Task_ButtonClearText_click(object sender, RoutedEventArgs e)
+        {
+            this.TextBoxTask.Clear();
+            (sender as Button).Visibility = Visibility.Hidden;
+        }
+
+        private void TextBoxTask_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (string.IsNullOrEmpty((sender as TextBox).Text))
+            {
+                this.Task_ButtonClearText.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                this.Task_ButtonClearText.Visibility = Visibility.Visible;
+            }
+        }
+        private void Task_comboboxday_DropDownClosed(object sender, EventArgs e)
+        {
+            string filter = Task_comboboxsort.SelectedValue.ToString();
+            if (filter == "Priority") filter = "IDPriority";
+            string filter2 = Task_comboboxday.SelectedValue.ToString();
+            if (filter2 == "Today")
+                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTaskByDate(DateTime.Now, filter).DefaultView;
+            else if (filter2 == "Tomorrow")
+                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTaskByDate(DateTime.Now.AddDays(1), filter).DefaultView;
+            else if (filter2 == "This week")
+                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTaskByWeek(DateTime.Now, filter).DefaultView;
+            else if (filter2 == "This month")
+                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTaskByMonth(DateTime.Now, filter).DefaultView;
+            else if (filter2 == "Anytime")
+                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTask(filter).DefaultView;
+        }
+
+        private void Task_comboboxsort_SelectionChanged(object sender, EventArgs e)
+        {
+            string filter = Task_comboboxsort.SelectedValue.ToString();
+            if (filter == "Priority") filter = "IDPriority";
+            string filter2 = Task_comboboxday.SelectedValue.ToString();
+            if (filter2 == "Today")
+                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTaskByDate(DateTime.Now, filter).DefaultView;
+            else if (filter2 == "Tomorrow")
+                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTaskByDate(DateTime.Now.AddDays(1), filter).DefaultView;
+            else if (filter2 == "This week")
+                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTaskByWeek(DateTime.Now, filter).DefaultView;
+            else if (filter2 == "This month")
+                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTaskByMonth(DateTime.Now, filter).DefaultView;
+            else if (filter2 == "Anytime")
+                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTask(filter).DefaultView;
+        }
+        private void Task_comboboxpriority_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cb = sender as ComboBox;
+            int priority = cb.SelectedIndex;
+            int id = -1;
+            if (cb.Tag != null) id = int.Parse(cb.Tag.ToString());
+            if (id >= 0) TaskDAO.Instance.UpdateTaskPriorityByID(id, priority);
+        }
+        private void Task_checkboxchecked_Clicked(object sender, RoutedEventArgs e)
+        {
+            CheckBox cb = sender as CheckBox;
+            int id = -1;
+            if (cb.Tag != null) id = int.Parse(cb.Tag.ToString());
+            int isChecked = -1;
+            if (cb.IsChecked == true) isChecked = 1;
+            if (cb.IsChecked == false) isChecked = 0;
+            if (id >= 0 && isChecked >= 0) TaskDAO.Instance.UpdateTaskCheckedByID(id, isChecked);
+        }
+        private void Task_buttondelete_Clicked(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            int id = -1;
+            if (btn.Tag != null) id = int.Parse(btn.Tag.ToString());
+            if (id >= 0 && MyMessageBox.setContent("Delete this task?").ShowDialog() == true)
+            {
+                TaskDAO.Instance.DeleteTaskByID(id);
+                this.listviewtask.ItemsSource = TaskDAO.Instance.GetListTask().DefaultView;
+            }
+        }
+        private void Task_calendardate_SelectionChange(object sender, SelectionChangedEventArgs e)
+        {
+            DatePicker datePicker = sender as DatePicker;
+            StackPanel stackPanel = datePicker.Parent as StackPanel;
+            int id = -1;
+            if (stackPanel.Tag != null) id = int.Parse(stackPanel.Tag.ToString());
+            foreach (object child in stackPanel.Children)
+            {
+                TimePicker timePicker;
+                if (child is TimePicker)
+                {
+                    timePicker = child as TimePicker;
+                    if (timePicker.SelectedTime != null)
+                    {
+                        DateTime dtd = datePicker.SelectedDate ?? DateTime.Now;
+                        DateTime dtt = timePicker.SelectedTime ?? DateTime.Now;
+                        DateTime? dateTime = dtd.Add(dtt.TimeOfDay);
+                        TaskDAO.Instance.UpdateTaskDeadlineByID(id, dateTime);
+                    }
+                }
+            }
+        }
+        private void Task_calendartime_SelectionChange(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
+        {
+            TimePicker timePicker = sender as TimePicker;
+            StackPanel stackPanel = timePicker.Parent as StackPanel;
+            int id = -1;
+            if (stackPanel.Tag != null) id = int.Parse(stackPanel.Tag.ToString());
+            foreach (object child in stackPanel.Children)
+            {
+                DatePicker datePicker;
+                if (child is DatePicker)
+                {
+                    datePicker = child as DatePicker;
+                    if (datePicker.SelectedDate != null)
+                    {
+                        DateTime dtd = datePicker.SelectedDate ?? DateTime.Now;
+                        DateTime dtt = timePicker.SelectedTime ?? DateTime.Now;
+                        DateTime? dateTime = dtd.Add(dtt.TimeOfDay);
+                        TaskDAO.Instance.UpdateTaskDeadlineByID(id, dateTime);
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region Diary
+        public void DiaryDefault()
+        {
+            this.Diary_calendar.SelectedDate = DateTime.Now;
+            this.Story_textbox.Foreground = Brushes.Black;
+        }
+        public void GetListDiaryTitle()
+        {
+            List<string> diarytitle = DiaryDAO.Instance.GetListDiaryTitleByDate(this.Diary_calendar.SelectedDate);
+            this.Story_titlelistbox.Items.Clear();
+            foreach (string s in diarytitle)
+            {
+                this.Story_titlelistbox.Items.Add(s);
+            }
+            if (diarytitle.Count > 0)
+                Story_titlelistbox.SelectedIndex = 0;
+        }
+        private void Story_textboxfastadd_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if (!string.IsNullOrEmpty(tb.Text))
+            {
+                this.Diary_ButtonClearTextbox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                this.Diary_ButtonClearTextbox.Visibility = Visibility.Collapsed;
+            }
+        }
+        private void Diary_ButtonClearTextbox_Clicked(object sender, RoutedEventArgs e)
+        {
+            this.Story_textboxfastadd.Clear();
+            (sender as Button).Visibility = Visibility.Collapsed;
+        }
+        private void Story_listboxfontstyle_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            List<ListBoxItem> mySelectedItems = new List<ListBoxItem>();
+            ListBox lb = sender as ListBox;
+            bool flagBold = false, flagItalic = false, flagUnderline = false;
+            foreach (ListBoxItem item in lb.SelectedItems)
+            {
+                if (item.Tag != null)
+                {
+                    if (item.Tag.ToString() == "Bold") { this.Story_textbox.FontWeight = FontWeights.Bold; flagBold = true; }
+                    else if (item.Tag.ToString() == "Italic") { this.Story_textbox.FontStyle = FontStyles.Italic; flagItalic = true; }
+                    else if (item.Tag.ToString() == "Underline") { this.Story_textbox.TextDecorations = TextDecorations.Underline; flagUnderline = true; }
+                    DiaryDAO.Instance.UpdateDiaryFontStyle(this.Diary_calendar.SelectedDate, this.Story_titlelistbox.SelectedValue.ToString(), item.Tag.ToString());
+                }
+            }
+            if (flagBold == false) this.Story_textbox.FontWeight = FontWeights.Normal;
+            if (flagItalic == false) this.Story_textbox.FontStyle = FontStyles.Normal;
+            if (flagUnderline == false) this.Story_textbox.TextDecorations = null;
+        }
+        private void Diary_calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            GetListDiaryTitle();
+        }
+        private void Diary_dialoghost_Closing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs)
+        {
+            MaterialDesignThemes.Wpf.DialogHost dialog = sender as MaterialDesignThemes.Wpf.DialogHost;
+            if (!Equals(eventArgs.Parameter, true)) return;
+            if (!string.IsNullOrWhiteSpace(Story_textboxadd.Text))
+            {
+                string title = Story_textboxadd.Text.Trim();
+                if (!Story_titlelistbox.Items.Contains(title))
+                {
+                    this.Story_titlelistbox.Items.Add(title);
+
+                    DiaryDAO.Instance.InsertDiary(this.Diary_calendar.SelectedDate, title);
+                }
+            }
+            if (Story_titlelistbox.Items.Count > 0)
+                Story_titlelistbox.SelectedIndex = 0;
+        }
+        private void Diary_titlelistbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.Story_textbox.Text = "";
+            this.Story_textbox.FontWeight = FontWeights.Normal;
+            this.Story_textbox.FontStyle = FontStyles.Normal;
+            this.Story_textbox.TextDecorations = null;
+            if (this.Story_titlelistbox.Items.Count > 0)
+            {
+                Diary diary = DiaryDAO.Instance.GetDiaryByDateAndTitle(this.Diary_calendar.SelectedDate, this.Story_titlelistbox.SelectedValue.ToString());
+                if (!string.IsNullOrWhiteSpace(diary.Story))
+                {
+                    this.Story_textbox.Text = diary.Story;
+                    this.Story_textbox.FontFamily = new FontFamily(diary.Fontfamily);
+                    this.Story_textbox.Foreground = new System.Windows.Media.SolidColorBrush((Color)ColorConverter.ConvertFromString(diary.Fontcolor));
+                    this.Story_textbox.FontSize = diary.Fontsize;
+                    if (diary.Fontstyle == "Italic") { this.Story_textbox.FontStyle = FontStyles.Italic; }
+                    else if (diary.Fontstyle == "Bold") { this.Story_textbox.FontWeight = FontWeights.Bold; }
+                    else if (diary.Fontstyle == "Underline") { this.Story_textbox.TextDecorations = TextDecorations.Underline; }
+                }
+            }
+        }
+        private void Story_buttonsave_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (this.Story_titlelistbox.Items.Count > 0)
+                DiaryDAO.Instance.UpdateDiaryStory(this.Diary_calendar.SelectedDate, this.Story_titlelistbox.SelectedItem.ToString(), this.Story_textbox.Text);
+            else
+            {
+                string content = this.Story_textbox.Text;
+                if (!string.IsNullOrWhiteSpace(content) && !string.IsNullOrEmpty(content))
+                    DiaryDAO.Instance.InsertDiary(this.Diary_calendar.SelectedDate, DateTime.Now.ToShortTimeString(), content);
+            }
+            GetListDiaryTitle();
+        }
+
+        private void Story_comboboxfontfamily_SelectionChange(object sender, SelectionChangedEventArgs e)
+        {
+            this.Story_textbox.FontFamily = new FontFamily(this.Story_comboboxfontfamily.SelectedValue.ToString());
+            if (this.Story_titlelistbox.Items.Count > 0)
+            {
+                DiaryDAO.Instance.UpdateDiaryFontFamily(this.Diary_calendar.SelectedDate, this.Story_titlelistbox.SelectedItem.ToString(), (sender as ComboBox).SelectedValue.ToString());
+            }
+        }
+
+        private void Story_comboboxfontcolor_SelectionChange(object sender, SelectionChangedEventArgs e)
+        {
+            this.Story_textbox.Foreground = new System.Windows.Media.SolidColorBrush((Color)ColorConverter.ConvertFromString((sender as ComboBox).SelectedValue.ToString()));
+            if (this.Story_titlelistbox.Items.Count > 0)
+            {
+                DiaryDAO.Instance.UpdateDiaryFontColor(this.Diary_calendar.SelectedDate, this.Story_titlelistbox.SelectedItem.ToString(), (sender as ComboBox).SelectedValue.ToString());
+            }
+        }
+
+        private void Story_comboboxfontsize_SelectionChange(object sender, SelectionChangedEventArgs e)
+        {
+            this.Story_textbox.FontSize = int.Parse((sender as ComboBox).SelectedValue.ToString());
+            if (this.Story_titlelistbox.Items.Count > 0)
+            {
+                DiaryDAO.Instance.UpdateDiaryFontSize(this.Diary_calendar.SelectedDate, this.Story_titlelistbox.SelectedItem.ToString(), int.Parse((sender as ComboBox).SelectedValue.ToString()));
+            }
+        }
+        private void Story_textboxfastadd_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string content = this.Story_textboxfastadd.Text;
+                if (!string.IsNullOrWhiteSpace(content) && !string.IsNullOrEmpty(content))
+                    DiaryDAO.Instance.InsertDiary(DateTime.Now, DateTime.Now.ToShortTimeString(), content);
+            }
+            GetListDiaryTitle();
+        }
+
+        private void Story_buttondelete_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (this.Story_titlelistbox.Items.Count > 0)
+            {
+                if (MyMessageBox.setContent("Bạn thực sự muốn xóa?").ShowDialog() == true)
+                {
+                    DiaryDAO.Instance.DeleteDiary(this.Diary_calendar.SelectedDate, this.Story_titlelistbox.SelectedItem.ToString());
+                    GetListDiaryTitle();
+                }
             }
         }
         #endregion
@@ -752,7 +788,6 @@ namespace work_space
                 this.Account_PageButtonSave.Visibility = Visibility.Collapsed;
                 //save account
                 account.SaveAccount();
-
             }
         }
 
@@ -796,26 +831,33 @@ namespace work_space
         }
         #endregion
 
-        #region Document
-        public void DocumentDefault() { }
+        #region contact
 
+        private void MoveToGmailSite(object sender, MouseButtonEventArgs e)
+        {
+            //Process.Start(new ProcessStartInfo("quanghuy1998kh@gmail.com"));
+            //e.Handled = true;
+        }
 
+        private void MoveToFacebookSite(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo("https://www.facebook.com/quanghuy1999kh"));
+            e.Handled = true;
+        }
 
+        private void MoveToTwitterSite(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo("https://twitter.com/quanghuy1998kh"));
+            e.Handled = true;
+        }
 
-
+        private void MoveToGitHubSite(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo("https://github.com/huynguyen1999kh/work-space"));
+            e.Handled = true;
+        }
         #endregion
 
-        private void Image_Loaded(object sender, RoutedEventArgs e)
-        {
-    
-        }
-
-        private void Window_sizechange(object sender, SizeChangedEventArgs e)
-        {
-            if (this.ActualWidth < 1000)
-                this.Home_cardAccount.Visibility = Visibility.Collapsed;
-            else
-                this.Home_cardAccount.Visibility = Visibility.Visible;
-        }
+        
     }
 }

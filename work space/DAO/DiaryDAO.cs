@@ -123,7 +123,7 @@ namespace work_space.DAO
                 }
             return 0;
         }
-        public int UpdateDiaryFontSize(DateTime? date, string title, string fs)
+        public int UpdateDiaryFontStyle(DateTime? date, string title, string fs)
         {
             if (!string.IsNullOrEmpty(fs))
             {

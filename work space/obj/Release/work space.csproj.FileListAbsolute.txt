@@ -1,0 +1,67 @@
+D:\myprojects\work space\work space\bin\Release\work space.exe.config
+D:\myprojects\work space\work space\bin\Release\work space.exe
+D:\myprojects\work space\work space\bin\Release\work space.pdb
+D:\myprojects\work space\work space\bin\Release\BespokeFusion.dll
+D:\myprojects\work space\work space\bin\Release\ControlzEx.dll
+D:\myprojects\work space\work space\bin\Release\Dragablz.dll
+D:\myprojects\work space\work space\bin\Release\MahApps.Metro.dll
+D:\myprojects\work space\work space\bin\Release\MaterialDesignColors.dll
+D:\myprojects\work space\work space\bin\Release\MaterialDesignThemes.Wpf.dll
+D:\myprojects\work space\work space\bin\Release\System.Windows.Interactivity.dll
+D:\myprojects\work space\work space\bin\Release\Xceed.Wpf.AvalonDock.dll
+D:\myprojects\work space\work space\bin\Release\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+D:\myprojects\work space\work space\bin\Release\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+D:\myprojects\work space\work space\bin\Release\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+D:\myprojects\work space\work space\bin\Release\Xceed.Wpf.Toolkit.dll
+D:\myprojects\work space\work space\bin\Release\ControlzEx.pdb
+D:\myprojects\work space\work space\bin\Release\Dragablz.pdb
+D:\myprojects\work space\work space\bin\Release\Dragablz.xml
+D:\myprojects\work space\work space\bin\Release\MahApps.Metro.pdb
+D:\myprojects\work space\work space\bin\Release\MahApps.Metro.xml
+D:\myprojects\work space\work space\bin\Release\MaterialDesignThemes.Wpf.pdb
+D:\myprojects\work space\work space\bin\Release\MaterialDesignThemes.Wpf.xml
+D:\myprojects\work space\work space\bin\Release\de\Xceed.Wpf.AvalonDock.resources.dll
+D:\myprojects\work space\work space\bin\Release\es\Xceed.Wpf.AvalonDock.resources.dll
+D:\myprojects\work space\work space\bin\Release\fr\Xceed.Wpf.AvalonDock.resources.dll
+D:\myprojects\work space\work space\bin\Release\hu\Xceed.Wpf.AvalonDock.resources.dll
+D:\myprojects\work space\work space\bin\Release\it\Xceed.Wpf.AvalonDock.resources.dll
+D:\myprojects\work space\work space\bin\Release\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
+D:\myprojects\work space\work space\bin\Release\ro\Xceed.Wpf.AvalonDock.resources.dll
+D:\myprojects\work space\work space\bin\Release\ru\Xceed.Wpf.AvalonDock.resources.dll
+D:\myprojects\work space\work space\bin\Release\sv\Xceed.Wpf.AvalonDock.resources.dll
+D:\myprojects\work space\work space\bin\Release\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+D:\myprojects\work space\work space\obj\Release\work space.csprojAssemblyReference.cache
+D:\myprojects\work space\work space\obj\Release\AccountPage1.g.cs
+D:\myprojects\work space\work space\obj\Release\AccountPage2.g.cs
+D:\myprojects\work space\work space\obj\Release\AccountPage3.g.cs
+D:\myprojects\work space\work space\obj\Release\AccountPage4.g.cs
+D:\myprojects\work space\work space\obj\Release\Custom controls\HomeCard.g.cs
+D:\myprojects\work space\work space\obj\Release\Custom controls\MyMessageBox.g.cs
+D:\myprojects\work space\work space\obj\Release\Custom controls\ScheduleCard.g.cs
+D:\myprojects\work space\work space\obj\Release\MainWindow.g.cs
+D:\myprojects\work space\work space\obj\Release\windowAddCategory.g.cs
+D:\myprojects\work space\work space\obj\Release\WindowAddScheduleItem.g.cs
+D:\myprojects\work space\work space\obj\Release\WindowEvent.g.cs
+D:\myprojects\work space\work space\obj\Release\App.g.cs
+D:\myprojects\work space\work space\obj\Release\GeneratedInternalTypeHelper.g.cs
+D:\myprojects\work space\work space\obj\Release\work space_MarkupCompile.cache
+D:\myprojects\work space\work space\obj\Release\work space_MarkupCompile.lref
+D:\myprojects\work space\work space\obj\Release\App.baml
+D:\myprojects\work space\work space\obj\Release\AccountPage1.baml
+D:\myprojects\work space\work space\obj\Release\AccountPage2.baml
+D:\myprojects\work space\work space\obj\Release\AccountPage3.baml
+D:\myprojects\work space\work space\obj\Release\AccountPage4.baml
+D:\myprojects\work space\work space\obj\Release\Custom controls\HomeCard.baml
+D:\myprojects\work space\work space\obj\Release\Custom controls\MyMessageBox.baml
+D:\myprojects\work space\work space\obj\Release\Custom controls\ScheduleCard.baml
+D:\myprojects\work space\work space\obj\Release\MainWindow.baml
+D:\myprojects\work space\work space\obj\Release\windowAddCategory.baml
+D:\myprojects\work space\work space\obj\Release\WindowAddScheduleItem.baml
+D:\myprojects\work space\work space\obj\Release\WindowEvent.baml
+D:\myprojects\work space\work space\obj\Release\work space.g.resources
+D:\myprojects\work space\work space\obj\Release\work_space.Properties.Resources.resources
+D:\myprojects\work space\work space\obj\Release\work space.csproj.GenerateResource.cache
+D:\myprojects\work space\work space\obj\Release\work space.csproj.CoreCompileInputs.cache
+D:\myprojects\work space\work space\obj\Release\work space.csproj.CopyComplete
+D:\myprojects\work space\work space\obj\Release\work space.exe
+D:\myprojects\work space\work space\obj\Release\work space.pdb
