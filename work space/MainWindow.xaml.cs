@@ -255,7 +255,7 @@ namespace work_space
                     {
                         StackPanel stk = obj as StackPanel;
 
-                        WindowAddScheduleItem window = new WindowAddScheduleItem(GetWeekType(), int.Parse(stk.Tag.ToString()));
+                        WindowAddScheduleItem window = new WindowAddScheduleItem(GetWeekType(), int.Parse(stk.Tag.ToString()), this.Schedule_buttonweek1.Visibility == Visibility.Visible);
                         if (window.ShowDialog() == true)
                         {
                             List<ScheduleItem> listmon = ScheduleDAO.Instance.GetScheduleItemByDayofWeek(int.Parse(stk.Tag.ToString()), GetWeekType());

@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/schedule2.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("wsdata.mdf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("wsdata_log.ldf")]
 
 

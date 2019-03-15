@@ -23,19 +23,34 @@ namespace work_space
     {
         int weektype;
         int dayofweek;
+        bool is2weekmode = false;
         ScheduleItem scheduleItem;
+
         public WindowAddScheduleItem(int weektype,int dayofweek)
         {
+            //constructer for insert only
             InitializeComponent();
             this.weektype = weektype;
             this.dayofweek = dayofweek;
         }
+        public WindowAddScheduleItem(int weektype, int dayofweek, bool is2weekmode)
+        {
+            //constructer for insert only
+            InitializeComponent();
+            this.weektype = weektype;
+            this.dayofweek = dayofweek;
+            this.is2weekmode = is2weekmode;
+            if (is2weekmode) 
+                this.Ckboxweekly.Visibility = Visibility.Visible;
+        }
         public WindowAddScheduleItem(ScheduleItem item)
         {
+            //constructer for update only
             InitializeComponent();
             this.scheduleItem = item;
             SetItemContent();
         }
+
         private void SetItemContent()
         {
             this.TxbName.Text = scheduleItem.Title;
@@ -77,6 +92,15 @@ namespace work_space
                 if (this.scheduleItem == null)
                 {
                     ScheduleDAO.Instance.InsertSchedule(item);
+                    if (this.is2weekmode == true)
+                    {
+                        if (this.Ckboxweekly.IsChecked==true)
+                        {
+                            if (item.Weektype == 0) item.Weektype = 1;
+                            else item.Weektype = 0;
+                            ScheduleDAO.Instance.InsertSchedule(item);
+                        }
+                    }
                 }
                 else
                 {

@@ -132,3 +132,6 @@ D:\myprojects\work space\work space\obj\Debug\work space.csproj.CoreCompileInput
 D:\myprojects\work space\work space\obj\Debug\work space.csproj.CopyComplete
 D:\myprojects\work space\work space\obj\Debug\work space.exe
 D:\myprojects\work space\work space\obj\Debug\work space.pdb
+D:\myprojects\work space\work space\bin\Debug\WSdata.mdf
+D:\myprojects\work space\work space\bin\Debug\WSdata_log.ldf
+D:\myprojects\work space\work space\obj\Debug\work space_Content.g.cs

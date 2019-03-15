@@ -12,7 +12,7 @@ namespace work_space.DAO
     {
         private static DataProvider instance; //singleton
 
-        private string connectionString = @"Data Source=.\;Initial Catalog=workspace;Integrated Security=True";
+        private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|WSdata.mdf;Integrated Security=True";
 
         public static DataProvider Instance
         {

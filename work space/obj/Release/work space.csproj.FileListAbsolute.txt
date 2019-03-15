@@ -65,3 +65,6 @@ D:\myprojects\work space\work space\obj\Release\work space.csproj.CoreCompileInp
 D:\myprojects\work space\work space\obj\Release\work space.csproj.CopyComplete
 D:\myprojects\work space\work space\obj\Release\work space.exe
 D:\myprojects\work space\work space\obj\Release\work space.pdb
+D:\myprojects\work space\work space\bin\Release\WSdata.mdf
+D:\myprojects\work space\work space\bin\Release\WSdata_log.ldf
+D:\myprojects\work space\work space\obj\Release\work space_Content.g.cs

@@ -52,6 +52,11 @@
                     </materialDesign:TimePicker>
                     <xctk:ColorPicker x:Name="ColorPicker" Foreground="#FF673AB7" BorderBrush="#FF673AB7" Background="Transparent" Width="50" Height="20" VerticalAlignment="Center">
                     </xctk:ColorPicker>
+                    <CheckBox Margin="10 0 0 0" Visibility="Collapsed" Name="Ckboxweekly">
+                        <TextBlock Foreground="#FF673AB7">
+                            Weekly
+                        </TextBlock>
+                    </CheckBox>
                 </StackPanel>
                 <Grid Margin="0 40 0 0">
                     <Grid.ColumnDefinitions>
