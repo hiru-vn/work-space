@@ -34,7 +34,7 @@
         <Grid Height="60" Grid.Row="0" VerticalAlignment="Top" 
               Background="#FF9C27B0">
             <TextBlock Height="{Binding ActualWidth, ConverterParameter=1, Converter={StaticResource PercentageConverter}, ElementName=canvas}" Text="WORK SPACE" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" FontFamily="Champagne &amp; Limousines" FontWeight="Bold" />
-            <Button Height="{Binding ActualWidth, ConverterParameter=1, Converter={StaticResource PercentageConverter}, ElementName=canvas}" HorizontalAlignment="Right" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}">
+            <Button Click="CloseApplication" Height="{Binding ActualWidth, ConverterParameter=1, Converter={StaticResource PercentageConverter}, ElementName=canvas}" HorizontalAlignment="Right" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}">
                 <materialDesign:PackIcon Kind="Power"/>
             </Button>
         </Grid>

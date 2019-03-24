@@ -41,6 +41,10 @@ namespace work_space
             DiaryDefault();
             AccountsDefault();
         }
+        private void CloseApplication(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Close();
+        }
 
         #region Home
         public void HomeDefault()
@@ -856,8 +860,7 @@ namespace work_space
             Process.Start(new ProcessStartInfo("https://github.com/huynguyen1999kh/work-space"));
             e.Handled = true;
         }
-        #endregion
 
-        
+        #endregion
     }
 }
